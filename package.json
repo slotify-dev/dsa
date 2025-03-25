@@ -1,7 +1,7 @@
 {
   "type": "module",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "@slotify/dsa",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

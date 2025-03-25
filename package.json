@@ -1,11 +1,12 @@
 {
   "type": "module",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "@slotify/dsa",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://slotify.ca",
   "author": "Sandip Patel<sandip254@gmail.com>",
   "description": "A comprehensive collection of data structures and algorithms implemented in TypeScript",
   "repository": {

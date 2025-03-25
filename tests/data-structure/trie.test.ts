@@ -232,4 +232,226 @@ describe("Trie", () => {
         expect(trie.search("hello!")).toBe(false);
         expect(trie.search("hello?")).toBe(true);
     });
+
+    // Additional tests to improve coverage
+    test("Delete operation with complex branching", () => {
+        const trie = new Trie();
+
+        // Create a complex structure with multiple branches
+        trie.insert("test");
+        trie.insert("team");
+        trie.insert("tea");
+        trie.insert("teapot");
+        trie.insert("tear");
+
+        // Delete a leaf node
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("tea")).toBe(true);
+        expect(trie.search("teapot")).toBe(true);
+        expect(trie.search("tear")).toBe(true);
+
+        // Delete a node with children
+        expect(trie.delete("tea")).toBe(true);
+        expect(trie.search("tea")).toBe(false);
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("teapot")).toBe(true);
+        expect(trie.search("tear")).toBe(true);
+
+        // Delete a node that would make a branch empty
+        expect(trie.delete("teapot")).toBe(true);
+        expect(trie.search("teapot")).toBe(false);
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("tear")).toBe(true);
+    });
+
+    test("Delete operation with nested branches", () => {
+        const trie = new Trie();
+
+        // Create a structure where deleting a word should not affect others
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+
+        // Delete middle words
+        expect(trie.delete("ab")).toBe(true);
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("ab")).toBe(false);
+        expect(trie.search("abc")).toBe(true);
+        expect(trie.search("abcd")).toBe(true);
+
+        expect(trie.delete("abc")).toBe(true);
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("abcd")).toBe(true);
+    });
+
+    test("Delete operation that should clean up the trie", () => {
+        const trie = new Trie();
+
+        // Create a linear structure
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+
+        // Delete from the end
+        expect(trie.delete("abcd")).toBe(true);
+        expect(trie.search("abcd")).toBe(false);
+        expect(trie.search("abc")).toBe(true);
+
+        expect(trie.delete("abc")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("ab")).toBe(true);
+
+        expect(trie.delete("ab")).toBe(true);
+        expect(trie.search("ab")).toBe(false);
+        expect(trie.search("a")).toBe(true);
+
+        expect(trie.delete("a")).toBe(true);
+        expect(trie.search("a")).toBe(false);
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("CollectWords with empty trie", () => {
+        const trie = new Trie();
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("CollectWords with multiple end-of-word markers", () => {
+        const trie = new Trie();
+        
+        // Insert words where one is a prefix of another
+        trie.insert("a");
+        trie.insert("an");
+        trie.insert("ant");
+        trie.insert("antenna");
+        
+        const words = trie.getAllWords();
+        expect(words.length).toBe(4);
+        expect(words).toContain("a");
+        expect(words).toContain("an");
+        expect(words).toContain("ant");
+        expect(words).toContain("antenna");
+    });
+
+    test("Delete operation with complex node removal", () => {
+        const trie = new Trie();
+        
+        // Create a structure with multiple branches
+        trie.insert("car");
+        trie.insert("cart");
+        trie.insert("carpet");
+        trie.insert("carpool");
+        
+        // Delete a word that should not affect the structure much
+        expect(trie.delete("car")).toBe(true);
+        expect(trie.search("car")).toBe(false);
+        expect(trie.search("cart")).toBe(true);
+        expect(trie.search("carpet")).toBe(true);
+        expect(trie.search("carpool")).toBe(true);
+        
+        // Delete a word that should remove a branch
+        expect(trie.delete("carpet")).toBe(true);
+        expect(trie.search("carpet")).toBe(false);
+        expect(trie.search("cart")).toBe(true);
+        expect(trie.search("carpool")).toBe(true);
+        
+        // Delete all remaining words
+        expect(trie.delete("cart")).toBe(true);
+        expect(trie.delete("carpool")).toBe(true);
+        
+        // Trie should be empty
+        expect(trie.getAllWords()).toEqual([]);
+        expect(trie.search("c")).toBe(false);
+        expect(trie.startsWith("c")).toBe(false);
+    });
+
+    test("Delete operation with deep nested structure", () => {
+        const trie = new Trie();
+        
+        // Create a deep structure
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+        trie.insert("abcde");
+        
+        // Delete from the middle
+        expect(trie.delete("abc")).toBe(true);
+        
+        // Check that other words are still intact
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("ab")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("abcd")).toBe(true);
+        expect(trie.search("abcde")).toBe(true);
+        
+        // Delete the longest word
+        expect(trie.delete("abcde")).toBe(true);
+        
+        // Check remaining words
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("ab")).toBe(true);
+        expect(trie.search("abcd")).toBe(true);
+        expect(trie.search("abcde")).toBe(false);
+        
+        // Get all words
+        const words = trie.getAllWords();
+        expect(words.length).toBe(3);
+        expect(words).toContain("a");
+        expect(words).toContain("ab");
+        expect(words).toContain("abcd");
+    });
+
+    test("Delete operation with branch cleanup", () => {
+        const trie = new Trie();
+        
+        // Create a structure with multiple branches
+        trie.insert("test");
+        trie.insert("testing");
+        trie.insert("tester");
+        
+        // Delete the longest word
+        expect(trie.delete("testing")).toBe(true);
+        
+        // Check remaining words
+        expect(trie.search("test")).toBe(true);
+        expect(trie.search("tester")).toBe(true);
+        expect(trie.search("testing")).toBe(false);
+        
+        // Delete another word
+        expect(trie.delete("tester")).toBe(true);
+        
+        // Check remaining word
+        expect(trie.search("test")).toBe(true);
+        expect(trie.search("tester")).toBe(false);
+        
+        // Delete the last word
+        expect(trie.delete("test")).toBe(true);
+        
+        // Trie should be empty
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Delete operation with non-existent branches", () => {
+        const trie = new Trie();
+        
+        // Insert a word
+        trie.insert("hello");
+        
+        // Try to delete a word that doesn't exist but shares a prefix
+        expect(trie.delete("help")).toBe(false);
+        
+        // The original word should still be there
+        expect(trie.search("hello")).toBe(true);
+        
+        // Try to delete a completely different word
+        expect(trie.delete("world")).toBe(false);
+        
+        // The original word should still be there
+        expect(trie.search("hello")).toBe(true);
+    });
 });

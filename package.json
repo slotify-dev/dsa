@@ -33,18 +33,35 @@
   },
   "scripts": {
     "test": "bun test",
+    "clean": "rm -rf dist",
     "lint": "eslint . --ext .ts",
     "test:coverage": "bun test --coverage",
+    "build:js": "bun run scripts/build.ts",
     "release": "npm publish --access public",
     "build:types": "tsc --emitDeclarationOnly",
     "format": "prettier --write \"src/**/*.ts\"",
-    "build": "bun run build:js && bun run build:types",
-    "build:js": "bun build ./src/index.ts --outdir ./dist"
+    "build": "bun run scripts/build.ts && bun run build:types"
   },
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./bitwise": {
+      "import": "./dist/bitwise/index.js",
+      "types": "./dist/bitwise/index.d.ts"
+    },
+    "./bitwise/*": {
+      "import": "./dist/bitwise/*.js",
+      "types": "./dist/bitwise/*.d.ts"
+    },
+    "./binary-search": {
+      "import": "./dist/binary-search/index.js",
+      "types": "./dist/binary-search/index.d.ts"
+    },
+    "./binary-search/*": {
+      "import": "./dist/binary-search/*.js",
+      "types": "./dist/binary-search/*.d.ts"
     },
     "./*": {
       "import": "./dist/*.js",

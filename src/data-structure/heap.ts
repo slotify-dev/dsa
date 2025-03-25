@@ -1,4 +1,4 @@
-import { Comparator } from '../types/comparator';
+import { Comparator } from '../utils/comparator';
 
 /**
  * Generic heap data structure implementation.

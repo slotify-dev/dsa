@@ -1,4 +1,4 @@
-import { Comparator } from '../types/comparator';
+import { Comparator } from '../utils/comparator';
 
 /**
  * Represents a node in an AVL tree.

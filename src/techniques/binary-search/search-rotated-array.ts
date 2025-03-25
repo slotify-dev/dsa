@@ -29,10 +29,10 @@ import defaultComparator from './default-comparator';
  *   (person, age) => person.age - age
  * ); // returns 4
  */
-export default function searchRotatedArray<T, U = T>(
-  array: T[],
-  target: U,
-  comparator: (element: T, target: U) => number = defaultComparator
+export default function searchRotatedArray<T>(
+  array: readonly T[],
+  target: T,
+  comparator: (element: T, target: T) => number = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

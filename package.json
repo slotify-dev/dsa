@@ -1,7 +1,24 @@
 {
-  "name": "@slotify/dsa",
-  "module": "index.ts",
   "type": "module",
+  "license": "MIT",
+  "version": "1.0.0",
+  "name": "@slotify/dsa",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "Sandip Patel<sandip254@gmail.com>",
+  "description": "A comprehensive collection of data structures and algorithms implemented in TypeScript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slotify-dev/dsa.git"
+  },
+  "keywords": [
+    "data-structures",
+    "algorithms",
+    "typescript",
+    "javascript",
+    "dsa"
+  ],
   "devDependencies": {
     "@types/bun": "latest",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
@@ -13,7 +30,26 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
+    "test": "bun test",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write ."
-  }
+    "test:coverage": "bun test --coverage",
+    "release": "npm publish --access public",
+    "build:types": "tsc --emitDeclarationOnly",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "bun run build:js && bun run build:types",
+    "build:js": "bun build ./src/index.ts --outdir ./dist"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ]
 }

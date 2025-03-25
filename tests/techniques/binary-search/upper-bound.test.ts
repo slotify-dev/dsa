@@ -39,18 +39,18 @@ describe('upperBound', () => {
     it('should find the first element strictly greater than the target', () => {
       const target1 = 'cherry';
       expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target1)).toBe(4);
-      
+
       const target2 = 'coconut';
       expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target2)).toBe(4);
-      
+
       const target3 = 'blueberry';
-      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target3)).toBe(1);
+      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target3)).toBe(2);
     });
 
     it('should return array length if all elements are less than or equal to target', () => {
       const target1 = 'date';
       expect(upperBound(['apple', 'banana', 'cherry', 'date'], target1)).toBe(4);
-      
+
       const target2 = 'zebra';
       expect(upperBound(['apple', 'banana', 'cherry', 'date'], target2)).toBe(4);
     });

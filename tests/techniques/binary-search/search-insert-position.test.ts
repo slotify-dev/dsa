@@ -35,21 +35,21 @@ describe('searchInsertPosition', () => {
     it('should return the index if target is found', () => {
       const target1 = 'cherry';
       expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target1)).toBe(2);
-      
+
       const target2 = 'apple';
       expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target2)).toBe(0);
-      
+
       const target3 = 'date';
       expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target3)).toBe(3);
     });
 
     it('should return the insertion position if target is not found', () => {
       const target1 = 'blueberry';
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target1)).toBe(1);
-      
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target1)).toBe(2);
+
       const target2 = 'elderberry';
       expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target2)).toBe(4);
-      
+
       const target3 = 'aardvark';
       expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target3)).toBe(0);
     });

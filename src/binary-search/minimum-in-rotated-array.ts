@@ -1,4 +1,4 @@
-import defaultComparator from './default-comparator';
+import defaultComparator, { type comparator } from '../utils/comparator';
 
 /**
  * Finds the minimum element in a rotated sorted array.
@@ -39,7 +39,7 @@ import defaultComparator from './default-comparator';
  */
 export default function minimumInRotatedArray<T>(
   array: readonly T[],
-  comparator: (a: T, b: T) => number = defaultComparator
+  comparator: comparator<T> = defaultComparator
 ): T | number {
   let left = 0;
   let right = array.length - 1;

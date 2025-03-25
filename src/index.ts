@@ -8,9 +8,11 @@
  */
 
 // Re-export all modules
+export * as sorting from './sorting';
 export * as bitwise from './bitwise';
 export * as binarySearch from './binary-search';
 
 // Re-export all functions from all modules for top-level access
 export * from './bitwise';
+export * from './sorting';
 export * from './binary-search';

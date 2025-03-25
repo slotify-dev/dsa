@@ -1,4 +1,4 @@
-import defaultComparator from './default-comparator';
+import defaultComparator, { type comparator } from '../utils/comparator';
 
 /**
  * Finds a peak element in an array.
@@ -29,7 +29,7 @@ import defaultComparator from './default-comparator';
  */
 export default function peakElement<T>(
   array: readonly T[],
-  comparator: (a: T, b: T) => number = defaultComparator
+  comparator: comparator<T> = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

@@ -1,4 +1,4 @@
-import defaultComparator from './default-comparator';
+import defaultComparator, { type comparator } from '../utils/comparator';
 
 /**
  * Standard binary search implementation to find a target value in a sorted array.
@@ -30,7 +30,7 @@ import defaultComparator from './default-comparator';
 export default function standardBinarySearch<T>(
   array: readonly T[],
   target: T,
-  comparator: (element: T, target: T) => number = defaultComparator
+  comparator: comparator<T> = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

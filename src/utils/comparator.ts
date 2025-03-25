@@ -1,16 +1,7 @@
 /**
- * Utility comparator function that handles different types correctly.
- * 
- * @param a - First value to compare
- * @param b - Second value to compare
- * @returns -1 if a < b, 1 if a > b, 0 if equal
+ * A comparator function type definition for comparing two elements of the same type T.
  */
-function comparator<T>(a: T, b: T): number {
-  if (typeof a === 'string' && typeof b === 'string') {
-    return a.localeCompare(b);
-  }
-  return a < b ? -1 : a > b ? 1 : 0;
-}
+export type comparator<T> = (element: T, target: T) => number;
 
 /**
  * Default comparator function for binary search operations.
@@ -23,6 +14,9 @@ function comparator<T>(a: T, b: T): number {
  * @param target - The target value to compare against
  * @returns -1 if element < target, 1 if element > target, 0 if equal
  */
-export default function defaultComparator<T>(element: T, target: T): number {
-  return comparator(element, target);
+export default function defaultComparator<T>(a: T, b: T): number {
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.localeCompare(b);
+    }
+    return a < b ? -1 : a > b ? 1 : 0;
 }

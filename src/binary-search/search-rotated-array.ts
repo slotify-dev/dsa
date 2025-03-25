@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Searches for a target value in a rotated sorted array.
@@ -32,7 +32,7 @@ import defaultComparator, { type comparator } from '../utils/comparator';
 export default function searchRotatedArray<T>(
   array: readonly T[],
   target: T,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

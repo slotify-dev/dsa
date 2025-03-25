@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Bubble Sort Implementation
@@ -34,22 +34,32 @@ import defaultComparator, { type comparator } from '../utils/comparator';
  */
 export default function bubbleSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
 
+  if (n <= 1) {
+    return arr;
+  }
+
+  // Optimization flag to detect if any swaps were made in a pass
   let swapped;
 
+  // Traverse through all array elements
   for (let i = 0; i < n - 1; i++) {
     swapped = false;
 
+    // Last i elements are already in place
     for (let j = 0; j < n - i - 1; j++) {
+      // Compare adjacent elements
       if (comparator(arr[j], arr[j + 1]) > 0) {
+        // Swap if the element found is greater than the next element
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
         swapped = true;
       }
     }
 
+    // If no swapping occurred in this pass, array is sorted
     if (!swapped) {
       break;
     }

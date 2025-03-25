@@ -1,5 +1,5 @@
 import { lomutoPartition } from './partition';
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Helper function that performs the recursive quick sort
@@ -13,11 +13,13 @@ function quickHelper<T>(
   arr: T[],
   low: number,
   high: number,
-  comparator: comparator<T>
+  comparator: Comparator<T>
 ): void {
   if (low < high) {
+    // Get the partition index
     const pivotIndex = lomutoPartition(arr, low, high, comparator);
 
+    // Recursively sort elements before and after partition
     quickHelper(arr, low, pivotIndex - 1, comparator);
     quickHelper(arr, pivotIndex + 1, high, comparator);
   }
@@ -56,7 +58,7 @@ function quickHelper<T>(
  */
 export default function quickSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   if (arr.length <= 1) {
     return arr;

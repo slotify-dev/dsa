@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Merge Sort Implementation
@@ -12,13 +12,13 @@ import defaultComparator, { type comparator } from '../utils/comparator';
  * 
  * Characteristics:
  * - Stable sort (preserves relative order of equal elements)
- * - Not in-place (requires extra memory)
+ * - Modified to be in-place (modifies the original array)
  * - Efficient for external sorting (when data doesn't fit in memory)
  * - Uses divide-and-conquer strategy
  * 
  * @param arr - The array to be sorted
  * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
- * @returns A new sorted array
+ * @returns The sorted array (same reference as input)
  * 
  * @example
  * // Sort an array of numbers
@@ -33,55 +33,92 @@ import defaultComparator, { type comparator } from '../utils/comparator';
  */
 export default function mergeSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   if (arr.length <= 1) {
     return arr;
   }
 
-  const middle = Math.floor(arr.length / 2);
-  const left = arr.slice(0, middle);
-  const right = arr.slice(middle);
+  // Create a temporary array to store the sorted result
+  const temp = new Array(arr.length);
 
-  return mergeArrays(mergeSort(left, comparator), mergeSort(right, comparator), comparator);
+  // Call the helper function to perform the merge sort
+  mergeSortHelper(arr, 0, arr.length - 1, temp, comparator);
+
+  return arr;
 }
 
 /**
- * Merges two sorted arrays into a single sorted array
+ * Helper function to perform merge sort recursively
  * 
- * @param left - The left sorted array
- * @param right - The right sorted array
+ * @param arr - The array to be sorted
+ * @param left - The left index of the current subarray
+ * @param right - The right index of the current subarray
+ * @param temp - Temporary array for merging
  * @param comparator - Function to compare elements
- * @returns A new merged and sorted array
  */
-export function mergeArrays<T>(
-  left: T[],
-  right: T[],
-  comparator: comparator<T>
-): T[] {
-  const result: T[] = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
+function mergeSortHelper<T>(
+  arr: T[],
+  left: number,
+  right: number,
+  temp: T[],
+  comparator: Comparator<T>
+): void {
+  if (left < right) {
+    const mid = Math.floor((left + right) / 2);
 
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (comparator(left[leftIndex], right[rightIndex]) <= 0) {
-      result.push(left[leftIndex]);
-      leftIndex++;
+    // Sort the left half
+    mergeSortHelper(arr, left, mid, temp, comparator);
+
+    // Sort the right half
+    mergeSortHelper(arr, mid + 1, right, temp, comparator);
+
+    // Merge the sorted halves
+    merge(arr, left, mid, right, temp, comparator);
+  }
+}
+
+/**
+ * Merges two sorted subarrays into a single sorted subarray
+ * 
+ * @param arr - The array containing the subarrays
+ * @param left - The left index of the first subarray
+ * @param mid - The middle index separating the two subarrays
+ * @param right - The right index of the second subarray
+ * @param temp - Temporary array for merging
+ * @param comparator - Function to compare elements
+ */
+function merge<T>(
+  arr: T[],
+  left: number,
+  mid: number,
+  right: number,
+  temp: T[],
+  comparator: Comparator<T>
+): void {
+  // Copy both parts into the temporary array
+  for (let i = left; i <= right; i++) {
+    temp[i] = arr[i];
+  }
+
+  let i = left;      // Pointer for the left subarray
+  let j = mid + 1;   // Pointer for the right subarray
+  let k = left;      // Pointer for the merged array
+
+  // Merge the two subarrays back into the original array
+  while (i <= mid && j <= right) {
+    if (comparator(temp[i], temp[j]) <= 0) {
+      arr[k++] = temp[i++];
     } else {
-      result.push(right[rightIndex]);
-      rightIndex++;
+      arr[k++] = temp[j++];
     }
   }
 
-  while (leftIndex < left.length) {
-    result.push(left[leftIndex]);
-    leftIndex++;
+  // Copy any remaining elements from the left subarray
+  while (i <= mid) {
+    arr[k++] = temp[i++];
   }
 
-  while (rightIndex < right.length) {
-    result.push(right[rightIndex]);
-    rightIndex++;
-  }
-
-  return result;
+  // Note: We don't need to copy remaining elements from the right subarray
+  // as they are already in the correct position
 }

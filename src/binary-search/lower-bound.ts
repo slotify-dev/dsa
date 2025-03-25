@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Finds the index of the first element in a sorted array that is greater than or equal to the target.
@@ -35,7 +35,7 @@ import defaultComparator, { type comparator } from '../utils/comparator';
 export default function lowerBound<T>(
   array: readonly T[],
   target: T,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): number {
   let left = 0;
   let right = array.length;

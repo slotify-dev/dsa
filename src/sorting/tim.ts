@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Tim Sort Implementation
@@ -35,21 +35,31 @@ import defaultComparator, { type comparator } from '../utils/comparator';
 
 const MIN_RUN = 32;
 
-export default function tim<T>(
+export default function timSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
 
+  if (n <= 1) {
+    return arr;
+  }
+
+  // Sort individual subarrays of size MIN_RUN or less using insertion sort
   for (let i = 0; i < n; i += MIN_RUN) {
     insertionSort(arr, i, Math.min(i + MIN_RUN - 1, n - 1), comparator);
   }
 
+  // Start merging from size MIN_RUN
   for (let size = MIN_RUN; size < n; size = 2 * size) {
+    // Pick starting point of left subarray
     for (let left = 0; left < n; left += 2 * size) {
+      // Find ending point of left subarray
       const mid = left + size - 1;
+      // Find ending point of right subarray
       const right = Math.min(left + 2 * size - 1, n - 1);
 
+      // Merge subarrays arr[left...mid] and arr[mid+1...right]
       if (mid < right) {
         mergeSort(arr, left, mid, right, comparator);
       }
@@ -71,7 +81,7 @@ function insertionSort<T>(
   arr: T[],
   left: number,
   right: number,
-  comparator: comparator<T>
+  comparator: Comparator<T>
 ): void {
   for (let i = left + 1; i <= right; i++) {
     const temp = arr[i];
@@ -100,14 +110,17 @@ function mergeSort<T>(
   left: number,
   mid: number,
   right: number,
-  comparator: comparator<T>
+  comparator: Comparator<T>
 ): void {
+  // Calculate lengths of two subarrays to be merged
   const len1 = mid - left + 1;
   const len2 = right - mid;
 
+  // Create temporary arrays
   const leftArr = new Array(len1);
   const rightArr = new Array(len2);
 
+  // Copy data to temporary arrays
   for (let i = 0; i < len1; i++) {
     leftArr[i] = arr[left + i];
   }
@@ -115,10 +128,12 @@ function mergeSort<T>(
     rightArr[i] = arr[mid + 1 + i];
   }
 
-  let i = 0;
-  let j = 0;
-  let k = left;
+  // Merge the temporary arrays back into arr[left...right]
+  let i = 0;    // Initial index of first subarray
+  let j = 0;    // Initial index of second subarray
+  let k = left; // Initial index of merged subarray
 
+  // Compare and merge the two arrays
   while (i < len1 && j < len2) {
     if (comparator(leftArr[i], rightArr[j]) <= 0) {
       arr[k] = leftArr[i];
@@ -130,12 +145,14 @@ function mergeSort<T>(
     k++;
   }
 
+  // Copy remaining elements of leftArr[] if any
   while (i < len1) {
     arr[k] = leftArr[i];
     i++;
     k++;
   }
 
+  // Copy remaining elements of rightArr[] if any
   while (j < len2) {
     arr[k] = rightArr[j];
     j++;

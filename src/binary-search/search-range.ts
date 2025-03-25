@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Finds the starting and ending position of a target value in a sorted array.
@@ -31,7 +31,7 @@ import defaultComparator, { type comparator } from '../utils/comparator';
 export default function searchRange<T>(
   array: readonly T[],
   target: T,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): [number, number] {
   const findFirst = (): number => {
     let left = 0;

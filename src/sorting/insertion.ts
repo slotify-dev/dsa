@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Insertion Sort Implementation
@@ -34,19 +34,27 @@ import defaultComparator, { type comparator } from '../utils/comparator';
  */
 export default function insertionSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
 
+  if (n <= 1) {
+    return arr;
+  }
+
   for (let i = 1; i < n; i++) {
+    // Store the current element to be compared
     const key = arr[i];
 
+    // Move elements of arr[0..i-1] that are greater than key
+    // to one position ahead of their current position
     let j = i - 1;
     while (j >= 0 && comparator(arr[j], key) > 0) {
       arr[j + 1] = arr[j];
       j--;
     }
 
+    // Place the key in its correct position
     arr[j + 1] = key;
   }
 

@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Finds the index where a target should be inserted in a sorted array to maintain order.
@@ -35,7 +35,7 @@ import defaultComparator, { type comparator } from '../utils/comparator';
 export default function searchInsertPosition<T>(
   array: readonly T[],
   target: T,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

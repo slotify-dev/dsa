@@ -1,4 +1,4 @@
-import defaultComparator, { type comparator } from '../utils/comparator';
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Partition implementation for quicksort and related algorithms
@@ -24,21 +24,29 @@ export function lomutoPartition<T>(
   arr: T[],
   low: number,
   high: number,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): number {
+  // Choose the rightmost element as pivot
   const pivot = arr[high];
 
+  // Index of smaller element
   let i = low - 1;
 
+  // Traverse through all elements
+  // compare each element with pivot
   for (let j = low; j < high; j++) {
+    // If current element is smaller than the pivot
     if (comparator(arr[j], pivot) < 0) {
+      // Increment index of smaller element
       i++;
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
 
+  // Place the pivot element at its correct position
   [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
 
+  // Return the position where partition is done
   return i + 1;
 }
 
@@ -56,26 +64,31 @@ export function hoarePartition<T>(
   arr: T[],
   low: number,
   high: number,
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): number {
+  // Choose the middle element as pivot
   const pivot = arr[Math.floor((low + high) / 2)];
 
   let i = low - 1;
   let j = high + 1;
 
   while (true) {
+    // Find leftmost element greater than or equal to pivot
     do {
       i++;
     } while (comparator(arr[i], pivot) < 0);
 
+    // Find rightmost element less than or equal to pivot
     do {
       j--;
     } while (comparator(arr[j], pivot) > 0);
 
+    // If two pointers met
     if (i >= j) {
       return j;
     }
 
+    // Swap elements
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }

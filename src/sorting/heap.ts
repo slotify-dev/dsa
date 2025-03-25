@@ -1,21 +1,5 @@
 import heapify from './heapify';
-import defaultComparator, { type comparator } from '../utils/comparator';
-
-/**
- * Builds a heap from an array
- * 
- * @param arr - The array to convert into a heap
- * @param comparator - Function to compare elements (max heap by default)
- */
-export function buildHeap<T>(
-  arr: T[],
-  comparator: comparator<T> = (a, b) => a > b ? 1 : a < b ? -1 : 0
-): void {
-  const n = arr.length;
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(arr, n, i, comparator);
-  }
-}
+import defaultComparator, { type Comparator } from '../utils/comparator';
 
 /**
  * Heap Sort Implementation
@@ -50,16 +34,26 @@ export function buildHeap<T>(
  */
 export default function heapSort<T>(
   arr: T[],
-  comparator: comparator<T> = defaultComparator
+  comparator: Comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
-  const heapComparator = (a: T, b: T) => -comparator(a, b);
 
-  buildHeap(arr, heapComparator);
+  if (n <= 1) {
+    return arr;
+  }
 
+  // Build a max heap (for ascending order)
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    heapify(arr, n, i, (a, b) => -comparator(a, b));
+  }
+
+  // Extract elements from the heap one by one
   for (let i = n - 1; i > 0; i--) {
+    // Move current root (maximum element) to the end
     [arr[0], arr[i]] = [arr[i], arr[0]];
-    heapify(arr, i, 0, heapComparator);
+
+    // Call heapify on the reduced heap
+    heapify(arr, i, 0, (a, b) => -comparator(a, b));
   }
 
   return arr;

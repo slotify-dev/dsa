@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import countSetBits from '../../../src/bitwise/count-set-bits';
+import countSetBits from '../../src/bitwise/count-set-bits';
 
 describe('countSetBits', () => {
   it('should return 0 for 0', () => {

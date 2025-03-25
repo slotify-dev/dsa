@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import clearBit from '../../../src/bitwise/clear-bit';
+import clearBit from '../../src/bitwise/clear-bit';
 
 describe('clearBit', () => {
   it('should clear the bit at the specified position', () => {

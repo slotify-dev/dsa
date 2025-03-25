@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import * as Bitwise from '../../../src/bitwise';
+import * as Bitwise from '../../src/bitwise';
 
 describe('Bitwise module exports', () => {
   it('should export all bitwise functions', () => {

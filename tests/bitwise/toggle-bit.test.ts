@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import toggleBit from '../../../src/bitwise/toggle-bit';
+import toggleBit from '../../src/bitwise/toggle-bit';
 
 describe('toggleBit', () => {
   it('should toggle the bit from 0 to 1', () => {

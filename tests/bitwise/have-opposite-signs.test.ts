@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import haveOppositeSigns from '../../../src/bitwise/have-opposite-signs';
+import haveOppositeSigns from '../../src/bitwise/have-opposite-signs';
 
 describe('haveOppositeSigns', () => {
   it('should return true when numbers have opposite signs', () => {

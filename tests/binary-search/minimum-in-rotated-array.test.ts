@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { minimumInRotatedArray } from '../../../src/binary-search';
+import { minimumInRotatedArray } from '../../src/binary-search';
 
 describe('minimumInRotatedArray', () => {
   describe('with number arrays', () => {

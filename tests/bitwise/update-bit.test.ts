@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import updateBit from '../../../src/bitwise/update-bit';
+import updateBit from '../../src/bitwise/update-bit';
 
 describe('updateBit', () => {
   it('should update the bit to 1', () => {

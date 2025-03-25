@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { peakElement } from '../../../src/binary-search';
+import { peakElement } from '../../src/binary-search';
 
 describe('peakElement', () => {
   describe('with number arrays', () => {

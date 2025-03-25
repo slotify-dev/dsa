@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { searchInsertPosition } from '../../../src/binary-search';
+import { searchInsertPosition } from '../../src/binary-search';
 
 describe('searchInsertPosition', () => {
   describe('with number arrays', () => {

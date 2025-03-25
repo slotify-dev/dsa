@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import absoluteValue from '../../../src/bitwise/absolute-value';
+import absoluteValue from '../../src/bitwise/absolute-value';
 
 describe('absoluteValue', () => {
   it('should return the same value for positive numbers', () => {

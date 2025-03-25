@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import reverseBits from '../../../src/bitwise/reverse-bits';
+import reverseBits from '../../src/bitwise/reverse-bits';
 
 describe('reverseBits', () => {
   it('should reverse bits correctly for 0', () => {

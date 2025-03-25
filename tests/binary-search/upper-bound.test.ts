@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { upperBound } from '../../../src/binary-search';
+import { upperBound } from '../../src/binary-search';
 
 describe('upperBound', () => {
   describe('with number arrays', () => {

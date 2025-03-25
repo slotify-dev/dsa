@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import nextPowerOfTwo from '../../../src/bitwise/next-power-of-two';
+import nextPowerOfTwo from '../../src/bitwise/next-power-of-two';
 
 describe('nextPowerOfTwo', () => {
   it('should return 1 for 0 and negative numbers', () => {

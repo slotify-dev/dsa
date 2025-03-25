@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { standardBinarySearch } from '../../../src/binary-search';
+import { standardBinarySearch } from '../../src/binary-search';
 
 describe('standardBinarySearch', () => {
   describe('with number arrays', () => {

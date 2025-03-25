@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import getMostSignificantSetBit from '../../../src/bitwise/get-most-significant-set-bit';
+import getMostSignificantSetBit from '../../src/bitwise/get-most-significant-set-bit';
 
 describe('getMostSignificantSetBit', () => {
   it('should return -1 for 0', () => {

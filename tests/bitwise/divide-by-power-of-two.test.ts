@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import divideByPowerOfTwo from '../../../src/bitwise/divide-by-power-of-two';
+import divideByPowerOfTwo from '../../src/bitwise/divide-by-power-of-two';
 
 describe('divideByPowerOfTwo', () => {
   it('should divide by 2^0 correctly', () => {

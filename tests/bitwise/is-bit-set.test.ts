@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import isBitSet from '../../../src/bitwise/is-bit-set';
+import isBitSet from '../../src/bitwise/is-bit-set';
 
 describe('isBitSet', () => {
   it('should return true when the bit is set', () => {

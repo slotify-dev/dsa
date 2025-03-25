@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import setBit from '../../../src/bitwise/set-bit';
+import setBit from '../../src/bitwise/set-bit';
 
 describe('setBit', () => {
   it('should set the bit at the specified position', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import addWithoutPlus from '../../../src/bitwise/add-without-plus';
+import addWithoutPlus from '../../src/bitwise/add-without-plus';
 
 describe('addWithoutPlus', () => {
   it('should add two positive numbers correctly', () => {

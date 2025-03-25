@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import multiplyByPowerOfTwo from '../../../src/bitwise/multiply-by-power-of-two';
+import multiplyByPowerOfTwo from '../../src/bitwise/multiply-by-power-of-two';
 
 describe('multiplyByPowerOfTwo', () => {
   it('should multiply by 2^0 correctly', () => {

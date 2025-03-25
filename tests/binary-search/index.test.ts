@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import * as BinarySearch from '../../../src/binary-search';
+import * as BinarySearch from '../../src/binary-search';
 
 describe('BinarySearch Module', () => {
   it('should export all binary search functions', () => {

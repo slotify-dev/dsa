@@ -21,6 +21,38 @@ Binary search is an efficient algorithm for finding a target value within a sort
 - Determining insertion positions in sorted arrays
 - Minimizing maximum values in optimization problems
 
+## Import Examples
+
+There are several ways to import the binary search functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use binary search functions
+const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+```
+
+### Import only the binary search module
+
+```typescript
+import * as binarySearch from '@slotify/dsa/binary-search';
+
+// Use binary search functions directly
+const index = binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+```
+
+### Import specific functions
+
+```typescript
+import { standardBinarySearch, lowerBound } from '@slotify/dsa/binary-search';
+
+// Use imported functions directly
+const index = standardBinarySearch([1, 2, 3, 4, 5], 3);
+const lowerIndex = lowerBound([1, 2, 3, 5, 7], 4);
+```
+
 ## API Reference
 
 ### Standard Binary Search
@@ -37,11 +69,13 @@ Finds the index of a target value in a sorted array.
 **Example:**
 
 ```typescript
+import * as binarySearch from '@slotify/dsa/binary-search';
+
 // Find the index of 7 in a sorted array
-standardBinarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
+const index = binarySearch.standardBinarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
 
 // Search for a value that doesn't exist
-standardBinarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
+const notFound = binarySearch.standardBinarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
 ```
 
 ### Lower Bound
@@ -55,6 +89,15 @@ Finds the index of the first element greater than or equal to the target value.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+
+```typescript
+import { lowerBound } from '@slotify/dsa/binary-search';
+
+// Find the first element >= 6 in a sorted array
+const lowerIndex = lowerBound([1, 2, 3, 5, 7, 9], 6); // returns 4 (index of 7)
+```
+
 ### Upper Bound
 
 ```typescript
@@ -65,6 +108,15 @@ Finds the index of the first element greater than the target value.
 
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
+
+**Example:**
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Find the first element > 5 in a sorted array
+const upperIndex = slotify.binarySearch.upperBound([1, 2, 3, 5, 7, 9], 5); // returns 4 (index of 7)
+```
 
 ### Search Range
 
@@ -77,6 +129,15 @@ Finds the starting and ending positions of a target value in a sorted array.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+
+```typescript
+import { searchRange } from '@slotify/dsa/binary-search';
+
+// Find the range of occurrences of 3 in an array
+const [start, end] = searchRange([1, 2, 3, 3, 3, 5, 7], 3); // returns [2, 4]
+```
+
 ### Search in Rotated Sorted Array
 
 ```typescript
@@ -87,6 +148,15 @@ Searches for a target value in a rotated sorted array.
 
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
+
+**Example:**
+
+```typescript
+import * as binarySearch from '@slotify/dsa/binary-search';
+
+// Find 3 in a rotated sorted array
+const rotatedIndex = binarySearch.searchRotatedArray([7, 8, 9, 1, 2, 3, 4, 5, 6], 3); // returns 5
+```
 
 ### Find Minimum in Rotated Sorted Array
 
@@ -99,6 +169,15 @@ Finds the minimum element in a rotated sorted array.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Find the minimum element in a rotated sorted array
+const minIndex = slotify.binarySearch.minimumInRotatedArray([7, 8, 9, 1, 2, 3, 4, 5, 6]); // returns 3 (index of 1)
+```
+
 ### Find Peak Element
 
 ```typescript
@@ -110,6 +189,15 @@ Finds a peak element (an element greater than its neighbors) in an array.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+
+```typescript
+import { peakElement } from '@slotify/dsa/binary-search';
+
+// Find a peak element in an array
+const peak = peakElement([1, 3, 5, 7, 6, 4, 2]); // returns 3 (index of 7)
+```
+
 ### Search Insert Position
 
 ```typescript
@@ -120,3 +208,12 @@ Finds the index where a target should be inserted to maintain sorted order.
 
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
+
+**Example:**
+
+```typescript
+import * as binarySearch from '@slotify/dsa/binary-search';
+
+// Find where 4 should be inserted in a sorted array
+const insertPos = binarySearch.searchInsertPosition([1, 2, 3, 5, 7, 9], 4); // returns 3
+```

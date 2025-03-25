@@ -23,6 +23,48 @@ Bitwise operations work directly on the binary representation of numbers at the 
 - Embedded systems programming
 - Performance optimization
 
+## Import Examples
+
+There are several ways to import the bitwise operations functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use bitwise functions
+const result = slotify.bitwise.setBit(42, 3);
+```
+
+### Import only the bitwise module
+
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Use bitwise functions directly
+const result = bitwise.setBit(42, 3);
+```
+
+### Import specific functions
+
+```typescript
+import { setBit, isBitSet, countSetBits } from '@slotify/dsa/bitwise';
+
+// Use imported functions directly
+const result = setBit(42, 3);
+const isSet = isBitSet(42, 3);
+const count = countSetBits(42);
+```
+
+### Import with alias
+
+```typescript
+import * as bitwiseOps from '@slotify/dsa/bitwise';
+
+// Use with alias
+const result = bitwiseOps.setBit(42, 3);
+```
+
 ## API Reference
 
 ### Count Set Bits
@@ -38,11 +80,13 @@ Counts the number of bits that are set to 1 in a number using Brian Kernighan's 
 
 **Example:**
 ```typescript
+import { countSetBits } from '@slotify/dsa/bitwise';
+
 // Count set bits in 10 (binary: 1010)
-countSetBits(10); // returns 2
+const bits1 = countSetBits(10); // returns 2
 
 // Count set bits in 15 (binary: 1111)
-countSetBits(15); // returns 4
+const bits2 = countSetBits(15); // returns 4
 ```
 
 ### Is Bit Set
@@ -56,6 +100,17 @@ Checks if a bit at a specific position is set (1) or not (0).
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Check if bit 1 is set in 10 (binary: 1010)
+const isSet = bitwise.isBitSet(10, 1); // returns true
+
+// Check if bit 0 is set in 10 (binary: 1010)
+const isNotSet = bitwise.isBitSet(10, 0); // returns false
+```
+
 ### Set Bit
 
 ```typescript
@@ -66,6 +121,14 @@ Sets the bit at a specific position to 1.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Set bit 2 in 10 (binary: 1010)
+const result = slotify.bitwise.setBit(10, 2); // returns 14 (binary: 1110)
+```
 
 ### Clear Bit
 
@@ -78,6 +141,14 @@ Clears (sets to 0) the bit at a specific position.
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import { clearBit } from '@slotify/dsa/bitwise';
+
+// Clear bit 3 in 10 (binary: 1010)
+const result = clearBit(10, 3); // returns 2 (binary: 0010)
+```
+
 ### Toggle Bit
 
 ```typescript
@@ -88,6 +159,14 @@ Toggles (flips) the bit at a specific position.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Toggle bit 1 in 10 (binary: 1010)
+const result = bitwise.toggleBit(10, 1); // returns 8 (binary: 1000)
+```
 
 ### Update Bit
 
@@ -100,6 +179,14 @@ Updates the bit at a specific position to a given value (0 or 1).
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Update bit 0 to 1 in 10 (binary: 1010)
+const result = slotify.bitwise.updateBit(10, 0, 1); // returns 11 (binary: 1011)
+```
+
 ### Is Power of Two
 
 ```typescript
@@ -110,6 +197,17 @@ Checks if a number is a power of two.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import { isPowerOfTwo } from '@slotify/dsa/bitwise';
+
+// Check if 64 is a power of two
+const isPower = isPowerOfTwo(64); // returns true
+
+// Check if 63 is a power of two
+const isNotPower = isPowerOfTwo(63); // returns false
+```
 
 ### Next Power of Two
 
@@ -122,6 +220,14 @@ Finds the next power of two greater than or equal to the given number.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Find the next power of two after 10
+const nextPower = bitwise.nextPowerOfTwo(10); // returns 16
+```
+
 ### Get Least Significant Set Bit
 
 ```typescript
@@ -132,6 +238,14 @@ Gets the position of the least significant bit that is set to 1.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Get the least significant set bit in 12 (binary: 1100)
+const lsb = slotify.bitwise.getLeastSignificantSetBit(12); // returns 2
+```
 
 ### Get Most Significant Set Bit
 
@@ -144,6 +258,14 @@ Gets the position of the most significant bit that is set to 1.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import { getMostSignificantSetBit } from '@slotify/dsa/bitwise';
+
+// Get the most significant set bit in 12 (binary: 1100)
+const msb = getMostSignificantSetBit(12); // returns 3
+```
+
 ### Absolute Value
 
 ```typescript
@@ -154,6 +276,14 @@ Computes the absolute value of a number using bitwise operations.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Get absolute value of -25
+const abs = bitwise.absoluteValue(-25); // returns 25
+```
 
 ### Add Without Plus
 
@@ -166,6 +296,14 @@ Adds two numbers without using the addition operator.
 - **Time Complexity**: O(log n)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Add 17 and 25 without using +
+const sum = slotify.bitwise.addWithoutPlus(17, 25); // returns 42
+```
+
 ### Multiply by Power of Two
 
 ```typescript
@@ -176,6 +314,14 @@ Multiplies a number by a power of two using bit shifting.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import { multiplyByPowerOfTwo } from '@slotify/dsa/bitwise';
+
+// Multiply 5 by 2^3 (8)
+const product = multiplyByPowerOfTwo(5, 3); // returns 40
+```
 
 ### Divide by Power of Two
 
@@ -188,6 +334,14 @@ Divides a number by a power of two using bit shifting.
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Divide 40 by 2^3 (8)
+const quotient = bitwise.divideByPowerOfTwo(40, 3); // returns 5
+```
+
 ### Have Opposite Signs
 
 ```typescript
@@ -198,6 +352,14 @@ Checks if two numbers have opposite signs.
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Check if 25 and -25 have opposite signs
+const areOpposite = slotify.bitwise.haveOppositeSigns(25, -25); // returns true
+```
 
 ### Swap Without Temp
 
@@ -210,13 +372,29 @@ Swaps two numbers without using a temporary variable.
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 
+**Example:**
+```typescript
+import { swapWithoutTemp } from '@slotify/dsa/bitwise';
+
+// Swap 10 and 20 without using a temporary variable
+const [newA, newB] = swapWithoutTemp(10, 20); // returns [20, 10]
+```
+
 ### Reverse Bits
 
 ```typescript
-function reverseBits(num: number): number
+function reverseBits(num: number, bits: number = 32): number
 ```
 
-Reverses the bits of a 32-bit unsigned integer.
+Reverses the bits of a number.
 
-- **Time Complexity**: O(1)
+- **Time Complexity**: O(number of bits)
 - **Space Complexity**: O(1)
+
+**Example:**
+```typescript
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Reverse 8 bits of 42 (binary: 00101010)
+const reversed = bitwise.reverseBits(42, 8); // returns 84 (binary: 01010100)
+```

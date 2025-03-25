@@ -9,6 +9,44 @@ This directory contains examples demonstrating how to use the @slotify/dsa libra
 3. **bitwise-examples.ts** - Examples of all bitwise operations
 4. **run-all-examples.ts** - Script to run all examples at once
 
+## Import Styles Demonstrated
+
+The examples showcase different ways to import and use the library:
+
+### Import the entire library (basic-usage.ts)
+
+```typescript
+import * as slotify from '../dist/index.js';
+
+// Use with namespace
+const index = slotify.binarySearch.standardBinarySearch(array, target);
+```
+
+### Import specific modules (binary-search-examples.ts, bitwise-examples.ts)
+
+```typescript
+import * as bitwise from '../dist/bitwise/index.js';
+import * as binarySearch from '../dist/binary-search/index.js';
+
+// Use directly
+const index = binarySearch.standardBinarySearch(array, target);
+const result = bitwise.setBit(num, position);
+```
+
+### Import specific functions (not shown, but possible)
+
+```typescript
+import {
+  lowerBound,
+  standardBinarySearch,
+} from '../dist/binary-search/index.js';
+import { setBit, isBitSet } from '../dist/bitwise/index.js';
+
+// Use imported functions directly
+const index = standardBinarySearch(array, target);
+const result = setBit(num, position);
+```
+
 ## Running the Examples
 
 Make sure you have built the library first:

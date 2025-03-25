@@ -44,7 +44,7 @@ export default function heapSort<T>(
 
   // Build max heap (for ascending order)
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(arr, i, n, comparator);
+    heapify(arr, n, i, comparator);
   }
 
   // Extract elements from heap one by one
@@ -53,7 +53,7 @@ export default function heapSort<T>(
     [arr[0], arr[i]] = [arr[i], arr[0]];
 
     // Call heapify on the reduced heap
-    heapify(arr, 0, i, comparator);
+    heapify(arr, i, 0, comparator);
   }
 
   return arr;

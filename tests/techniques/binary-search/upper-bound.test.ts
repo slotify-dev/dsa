@@ -37,22 +37,31 @@ describe('upperBound', () => {
 
   describe('with string arrays', () => {
     it('should find the first element strictly greater than the target', () => {
-      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'cherry')).toBe(4);
-      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'coconut')).toBe(4);
-      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'blueberry')).toBe(1);
+      const target1 = 'cherry';
+      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target1)).toBe(4);
+      
+      const target2 = 'coconut';
+      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target2)).toBe(4);
+      
+      const target3 = 'blueberry';
+      expect(upperBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target3)).toBe(1);
     });
 
     it('should return array length if all elements are less than or equal to target', () => {
-      expect(upperBound(['apple', 'banana', 'cherry', 'date'], 'date')).toBe(4);
-      expect(upperBound(['apple', 'banana', 'cherry', 'date'], 'zebra')).toBe(4);
+      const target1 = 'date';
+      expect(upperBound(['apple', 'banana', 'cherry', 'date'], target1)).toBe(4);
+      
+      const target2 = 'zebra';
+      expect(upperBound(['apple', 'banana', 'cherry', 'date'], target2)).toBe(4);
     });
 
     it('should return 0 if all elements are greater than target', () => {
-      expect(upperBound(['banana', 'cherry', 'date'], 'apple')).toBe(0);
+      const target = 'apple';
+      expect(upperBound(['banana', 'cherry', 'date'], target)).toBe(0);
     });
   });
 
-  describe('with object arrays', () => {
+  describe('with object arrays and custom comparator', () => {
     interface Person {
       name: string;
       age: number;
@@ -67,30 +76,34 @@ describe('upperBound', () => {
     ];
 
     it('should find the first person with age strictly greater than target', () => {
+      const targetPerson: Person = { name: '', age: 25 };
       expect(upperBound(
         people,
-        25,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(3);
 
+      const targetPerson2: Person = { name: '', age: 20 };
       expect(upperBound(
         people,
-        20,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(1);
     });
 
     it('should return array length if all people are younger than or equal to target', () => {
+      const targetPerson: Person = { name: '', age: 35 };
       expect(upperBound(
         people,
-        35,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(5);
 
+      const targetPerson2: Person = { name: '', age: 40 };
       expect(upperBound(
         people,
-        40,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(5);
     });
   });
@@ -111,24 +124,27 @@ describe('upperBound', () => {
     ];
 
     it('should find products by price', () => {
+      const targetProduct: Product = { id: '', price: 20, stock: 0 };
       expect(upperBound(
         products,
-        20,
-        (product, price) => product.price - price
+        targetProduct,
+        (product, target) => product.price - target.price
       )).toBe(3);
 
+      const targetProduct2: Product = { id: '', price: 25, stock: 0 };
       expect(upperBound(
         products,
-        25,
-        (product, price) => product.price - price
+        targetProduct2,
+        (product, target) => product.price - target.price
       )).toBe(3);
     });
 
     it('should find products by stock', () => {
+      const targetProduct: Product = { id: '', price: 0, stock: 15 };
       expect(upperBound(
         products,
-        15,
-        (product, stock) => product.stock - stock
+        targetProduct,
+        (product, target) => product.stock - target.stock
       )).toBe(3);
     });
   });

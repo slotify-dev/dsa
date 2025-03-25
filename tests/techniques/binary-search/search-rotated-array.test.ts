@@ -106,24 +106,27 @@ describe('searchRotatedArray', () => {
     ];
 
     it('should find a person by age in a rotated array', () => {
+      const targetPerson1: Person = { name: '', age: 20 };
       expect(searchRotatedArray(
         rotatedPeople,
-        20,
-        (person, age) => person.age - age
+        targetPerson1,
+        (person, target) => person.age - target.age
       )).toBe(3);
 
+      const targetPerson2: Person = { name: '', age: 35 };
       expect(searchRotatedArray(
         rotatedPeople,
-        35,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(1);
     });
 
     it('should return -1 if no person with the target age is found', () => {
+      const targetPerson: Person = { name: '', age: 22 };
       expect(searchRotatedArray(
         rotatedPeople,
-        22,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(-1);
     });
   });
@@ -145,24 +148,27 @@ describe('searchRotatedArray', () => {
     ];
 
     it('should find a product by price in a rotated array', () => {
+      const targetProduct1: Product = { id: '', price: 10, category: '' };
       expect(searchRotatedArray(
         rotatedProducts,
-        10,
-        (product, price) => product.price - price
+        targetProduct1,
+        (product, target) => product.price - target.price
       )).toBe(3);
 
+      const targetProduct2: Product = { id: '', price: 40, category: '' };
       expect(searchRotatedArray(
         rotatedProducts,
-        40,
-        (product, price) => product.price - price
+        targetProduct2,
+        (product, target) => product.price - target.price
       )).toBe(1);
     });
 
     it('should return -1 if no product with the target price is found', () => {
+      const targetProduct: Product = { id: '', price: 25, category: '' };
       expect(searchRotatedArray(
         rotatedProducts,
-        25,
-        (product, price) => product.price - price
+        targetProduct,
+        (product, target) => product.price - target.price
       )).toBe(-1);
     });
 
@@ -176,16 +182,18 @@ describe('searchRotatedArray', () => {
     ];
 
     it('should find a product by category in a rotated array', () => {
+      const targetProduct1: Product = { id: '', price: 0, category: 'Beauty' };
       expect(searchRotatedArray(
         categoryRotatedProducts,
-        'Beauty',
-        (product, category) => product.category.localeCompare(category)
+        targetProduct1,
+        (product, target) => product.category.localeCompare(target.category)
       )).toBe(2);
 
+      const targetProduct2: Product = { id: '', price: 0, category: 'Home' };
       expect(searchRotatedArray(
         categoryRotatedProducts,
-        'Home',
-        (product, category) => product.category.localeCompare(category)
+        targetProduct2,
+        (product, target) => product.category.localeCompare(target.category)
       )).toBe(1);
     });
   });

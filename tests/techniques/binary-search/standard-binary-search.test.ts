@@ -45,7 +45,7 @@ describe('standardBinarySearch', () => {
     });
   });
 
-  describe('with object arrays', () => {
+  describe('with object arrays and custom comparator', () => {
     interface Person {
       name: string;
       age: number;
@@ -60,36 +60,41 @@ describe('standardBinarySearch', () => {
     ];
 
     it('should find people by age using custom comparator', () => {
+      const targetPerson: Person = { name: '', age: 30 };
       expect(standardBinarySearch(
         people,
-        30,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(2);
 
+      const targetPerson2: Person = { name: '', age: 20 };
       expect(standardBinarySearch(
         people,
-        20,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(0);
 
+      const targetPerson3: Person = { name: '', age: 40 };
       expect(standardBinarySearch(
         people,
-        40,
-        (person, age) => person.age - age
+        targetPerson3,
+        (person, target) => person.age - target.age
       )).toBe(4);
     });
 
     it('should return -1 for ages not in the array', () => {
+      const targetPerson: Person = { name: '', age: 22 };
       expect(standardBinarySearch(
         people,
-        22,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(-1);
 
+      const targetPerson2: Person = { name: '', age: 45 };
       expect(standardBinarySearch(
         people,
-        45,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(-1);
     });
   });
@@ -110,32 +115,36 @@ describe('standardBinarySearch', () => {
     ];
 
     it('should find books by year', () => {
+      const targetBook: Book = { title: '', year: 2010, isbn: '' };
       expect(standardBinarySearch(
         books,
-        2010,
-        (book, year) => book.year - year
+        targetBook,
+        (book, target) => book.year - target.year
       )).toBe(2);
     });
 
     it('should find books by isbn', () => {
+      const targetBook: Book = { title: '', year: 0, isbn: '333-3333333333' };
       expect(standardBinarySearch(
         books,
-        '333-3333333333',
-        (book, isbn) => book.isbn.localeCompare(isbn)
+        targetBook,
+        (book, target) => book.isbn.localeCompare(target.isbn)
       )).toBe(2);
     });
 
     it('should return -1 for books not in the array', () => {
+      const targetBook: Book = { title: '', year: 2012, isbn: '' };
       expect(standardBinarySearch(
         books,
-        2012,
-        (book, year) => book.year - year
+        targetBook,
+        (book, target) => book.year - target.year
       )).toBe(-1);
 
+      const targetBook2: Book = { title: '', year: 0, isbn: '666-6666666666' };
       expect(standardBinarySearch(
         books,
-        '666-6666666666',
-        (book, isbn) => book.isbn.localeCompare(isbn)
+        targetBook2,
+        (book, target) => book.isbn.localeCompare(target.isbn)
       )).toBe(-1);
     });
   });

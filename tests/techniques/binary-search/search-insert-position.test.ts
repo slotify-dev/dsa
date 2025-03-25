@@ -33,15 +33,25 @@ describe('searchInsertPosition', () => {
 
   describe('with string arrays', () => {
     it('should return the index if target is found', () => {
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'cherry')).toBe(2);
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'apple')).toBe(0);
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'date')).toBe(3);
+      const target1 = 'cherry';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target1)).toBe(2);
+      
+      const target2 = 'apple';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target2)).toBe(0);
+      
+      const target3 = 'date';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target3)).toBe(3);
     });
 
     it('should return the insertion position if target is not found', () => {
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'blueberry')).toBe(1);
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'elderberry')).toBe(4);
-      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], 'aardvark')).toBe(0);
+      const target1 = 'blueberry';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target1)).toBe(1);
+      
+      const target2 = 'elderberry';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target2)).toBe(4);
+      
+      const target3 = 'aardvark';
+      expect(searchInsertPosition(['apple', 'banana', 'cherry', 'date'], target3)).toBe(0);
     });
   });
 
@@ -59,30 +69,34 @@ describe('searchInsertPosition', () => {
     ];
 
     it('should return the index if target age is found', () => {
+      const targetPerson1: Person = { name: '', age: 25 };
       expect(searchInsertPosition(
         people,
-        25,
-        (person, age) => person.age - age
+        targetPerson1,
+        (person, target) => person.age - target.age
       )).toBe(1);
 
+      const targetPerson2: Person = { name: '', age: 20 };
       expect(searchInsertPosition(
         people,
-        20,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(0);
     });
 
     it('should return the insertion position if target age is not found', () => {
+      const targetPerson1: Person = { name: '', age: 22 };
       expect(searchInsertPosition(
         people,
-        22,
-        (person, age) => person.age - age
+        targetPerson1,
+        (person, target) => person.age - target.age
       )).toBe(1);
 
+      const targetPerson2: Person = { name: '', age: 40 };
       expect(searchInsertPosition(
         people,
-        40,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(4);
     });
   });
@@ -102,24 +116,27 @@ describe('searchInsertPosition', () => {
     ];
 
     it('should find the correct insertion position by price', () => {
+      const targetProduct: Product = { name: '', price: 25, category: '' };
       expect(searchInsertPosition(
         products,
-        25,
-        (product, price) => product.price - price
+        targetProduct,
+        (product, target) => product.price - target.price
       )).toBe(2);
     });
 
     it('should find the correct insertion position by category', () => {
+      const targetProduct1: Product = { name: '', price: 0, category: 'Clothing' };
       expect(searchInsertPosition(
         products,
-        'Clothing',
-        (product, category) => product.category.localeCompare(category)
+        targetProduct1,
+        (product, target) => product.category.localeCompare(target.category)
       )).toBe(2);
 
+      const targetProduct2: Product = { name: '', price: 0, category: 'Food' };
       expect(searchInsertPosition(
         products,
-        'Food',
-        (product, category) => product.category.localeCompare(category)
+        targetProduct2,
+        (product, target) => product.category.localeCompare(target.category)
       )).toBe(3);
     });
   });

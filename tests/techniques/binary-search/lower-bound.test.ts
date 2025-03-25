@@ -37,21 +37,28 @@ describe('lowerBound', () => {
 
   describe('with string arrays', () => {
     it('should find the first element greater than or equal to the target', () => {
-      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'cherry')).toBe(2);
-      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'coconut')).toBe(4);
-      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], 'blueberry')).toBe(1);
+      const target1 = 'cherry';
+      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target1)).toBe(2);
+      
+      const target2 = 'coconut';
+      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target2)).toBe(4);
+      
+      const target3 = 'blueberry';
+      expect(lowerBound(['apple', 'banana', 'cherry', 'cherry', 'date'], target3)).toBe(1);
     });
 
     it('should return array length if all elements are smaller than target', () => {
-      expect(lowerBound(['apple', 'banana', 'cherry', 'date'], 'zebra')).toBe(4);
+      const target = 'zebra';
+      expect(lowerBound(['apple', 'banana', 'cherry', 'date'], target)).toBe(4);
     });
 
     it('should return 0 if all elements are greater than or equal to target', () => {
-      expect(lowerBound(['banana', 'cherry', 'date'], 'apple')).toBe(0);
+      const target = 'apple';
+      expect(lowerBound(['banana', 'cherry', 'date'], target)).toBe(0);
     });
   });
 
-  describe('with object arrays', () => {
+  describe('with object arrays and custom comparator', () => {
     interface Person {
       name: string;
       age: number;
@@ -66,32 +73,36 @@ describe('lowerBound', () => {
     ];
 
     it('should find the first person with age greater than or equal to target', () => {
+      const targetPerson: Person = { name: '', age: 25 };
       expect(lowerBound(
         people,
-        25,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(1);
 
+      const targetPerson2: Person = { name: '', age: 27 };
       expect(lowerBound(
         people,
-        27,
-        (person, age) => person.age - age
+        targetPerson2,
+        (person, target) => person.age - target.age
       )).toBe(3);
     });
 
     it('should return array length if all people are younger than target', () => {
+      const targetPerson: Person = { name: '', age: 40 };
       expect(lowerBound(
         people,
-        40,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(5);
     });
 
     it('should return 0 if all people are older than or equal to target', () => {
+      const targetPerson: Person = { name: '', age: 20 };
       expect(lowerBound(
         people,
-        20,
-        (person, age) => person.age - age
+        targetPerson,
+        (person, target) => person.age - target.age
       )).toBe(0);
     });
   });
@@ -112,24 +123,27 @@ describe('lowerBound', () => {
     ];
 
     it('should find products by price', () => {
+      const targetProduct: Product = { id: '', price: 20, stock: 0 };
       expect(lowerBound(
         products,
-        20,
-        (product, price) => product.price - price
+        targetProduct,
+        (product, target) => product.price - target.price
       )).toBe(1);
 
+      const targetProduct2: Product = { id: '', price: 25, stock: 0 };
       expect(lowerBound(
         products,
-        25,
-        (product, price) => product.price - price
+        targetProduct2,
+        (product, target) => product.price - target.price
       )).toBe(3);
     });
 
     it('should find products by stock', () => {
+      const targetProduct: Product = { id: '', price: 0, stock: 15 };
       expect(lowerBound(
         products,
-        15,
-        (product, stock) => product.stock - stock
+        targetProduct,
+        (product, target) => product.stock - target.stock
       )).toBe(2);
     });
   });

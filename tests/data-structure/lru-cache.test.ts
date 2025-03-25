@@ -1,5 +1,5 @@
-import { LRUCache } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { LRUCache } from "../../src/data-structure";
 
 describe("LRUCache", () => {
     test("Empty cache operations", () => {

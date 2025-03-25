@@ -1,5 +1,5 @@
-import { MaxHeap } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { MaxHeap } from "../../src/data-structure";
 
 describe("MaxHeap", () => {
     test("Basic operations with numbers", () => {

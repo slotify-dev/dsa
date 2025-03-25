@@ -1,4 +1,4 @@
-import { Heap } from "../src/data-structure";
+import { Heap } from "../../src/data-structure";
 import { describe, test, expect } from "bun:test";
 
 describe("Heap", () => {

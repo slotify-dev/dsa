@@ -1,5 +1,5 @@
-import { AVLTree } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { AVLTree } from "../../src/data-structure";
 
 describe("AVLTree", () => {
     test("Empty tree operations", () => {

@@ -1,4 +1,4 @@
-import { Graph } from "../src/data-structure";
+import { Graph } from "../../src/data-structure";
 import { describe, test, expect } from "bun:test";
 
 describe("Graph", () => {

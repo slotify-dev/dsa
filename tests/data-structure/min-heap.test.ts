@@ -1,5 +1,5 @@
-import { MinHeap } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { MinHeap } from "../../src/data-structure";
 
 describe("MinHeap", () => {
     test("Basic operations with numbers", () => {

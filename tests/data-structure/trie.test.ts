@@ -1,4 +1,4 @@
-import { Trie } from "../src/data-structure";
+import { Trie } from "../../src/data-structure";
 import { describe, test, expect } from "bun:test";
 
 describe("Trie", () => {

@@ -1,5 +1,5 @@
-import { PriorityQueue } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { PriorityQueue } from "../../src/data-structure";
 
 describe("PriorityQueue", () => {
     test("Empty queue operations", () => {

@@ -1,5 +1,5 @@
-import { BinarySearchTree } from "../src/data-structure";
 import { describe, test, expect } from "bun:test";
+import { BinarySearchTree } from "../../src/data-structure";
 
 describe("BinarySearchTree", () => {
     test("Empty tree operations", () => {

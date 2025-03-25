@@ -12,7 +12,7 @@ import defaultComparator from './default-comparator';
  * 
  * @param array - A rotated sorted array of elements (may contain duplicates)
  * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
- * @returns The minimum element in the array
+ * @returns The minimum element in the array, or -1 if the array is empty
  * 
  * @example
  * // Find minimum in a number array [4, 5, 6, 7, 0, 1, 2]
@@ -32,17 +32,21 @@ import defaultComparator from './default-comparator';
  *   [{ age: 30 }, { age: 40 }, { age: 20 }, { age: 25 }],
  *   (a, b) => a.age - b.age
  * ); // returns { age: 20 }
+ * 
+ * @example
+ * // Handle empty array
+ * minimumInRotatedArray([]); // returns -1
  */
 export default function minimumInRotatedArray<T>(
   array: T[],
   comparator: (a: T, b: T) => number = defaultComparator
-): T | undefined {
+): T | number {
   let left = 0;
   let right = array.length - 1;
   
   // If the array is empty
   if (array.length === 0) {
-    return undefined;
+    return -1;
   }
   
   // If the array has only one element

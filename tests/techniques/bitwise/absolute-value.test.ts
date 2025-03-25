@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import absoluteValue from '../../../src/techniques/bitwise/absolute-value';
+import absoluteValue from '../../../src/bitwise/absolute-value';
 
 describe('absoluteValue', () => {
   it('should return the same value for positive numbers', () => {
@@ -24,7 +24,7 @@ describe('absoluteValue', () => {
   it('should handle edge cases correctly', () => {
     // Maximum 32-bit signed integer
     expect(absoluteValue(2147483647)).toBe(2147483647);
-    
+
     // Minimum 32-bit signed integer
     // Note: In two's complement, abs(-2^31) can't be represented as a positive 32-bit integer
     // because it would be 2^31, which is outside the range of a 32-bit signed integer
@@ -39,7 +39,7 @@ describe('absoluteValue', () => {
         expect(absoluteValue(i)).toBe(Math.abs(i));
       }
     }
-    
+
     // Test some random larger values
     const testValues = [1000, -1000, 10000, -10000, 100000, -100000, 1000000, -1000000];
     for (const value of testValues) {

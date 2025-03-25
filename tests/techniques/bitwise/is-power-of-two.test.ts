@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import isPowerOfTwo from '../../../src/techniques/bitwise/is-power-of-two';
+import isPowerOfTwo from '../../../src/bitwise/is-power-of-two';
 
 describe('isPowerOfTwo', () => {
   it('should return false for 0', () => {

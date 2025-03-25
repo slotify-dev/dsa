@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { lowerBound } from '../../../src/techniques/binary-search';
+import { lowerBound } from '../../../src/binary-search';
 
 describe('lowerBound', () => {
   describe('with number arrays', () => {

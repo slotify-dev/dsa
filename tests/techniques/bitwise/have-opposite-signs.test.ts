@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import haveOppositeSigns from '../../../src/techniques/bitwise/have-opposite-signs';
+import haveOppositeSigns from '../../../src/bitwise/have-opposite-signs';
 
 describe('haveOppositeSigns', () => {
   it('should return true when numbers have opposite signs', () => {
@@ -36,7 +36,7 @@ describe('haveOppositeSigns', () => {
     const maxInt32 = 2147483647;
     // Minimum 32-bit signed integer
     const minInt32 = -2147483648;
-    
+
     expect(haveOppositeSigns(maxInt32, minInt32)).toBe(true);
     expect(haveOppositeSigns(maxInt32, maxInt32)).toBe(false);
     expect(haveOppositeSigns(minInt32, minInt32)).toBe(false);

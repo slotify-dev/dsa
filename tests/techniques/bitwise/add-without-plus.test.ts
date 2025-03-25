@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import addWithoutPlus from '../../../src/techniques/bitwise/add-without-plus';
+import addWithoutPlus from '../../../src/bitwise/add-without-plus';
 
 describe('addWithoutPlus', () => {
   it('should add two positive numbers correctly', () => {
@@ -35,10 +35,10 @@ describe('addWithoutPlus', () => {
   it('should handle edge cases correctly', () => {
     // Maximum 32-bit signed integer
     const maxInt32 = 2147483647;
-    
+
     // Adding 1 to MAX_INT should result in MIN_INT
     expect(addWithoutPlus(maxInt32, 1)).toBe(-2147483648);
-    
+
     // Adding -1 to MIN_INT should result in MAX_INT
     expect(addWithoutPlus(-2147483648, -1)).toBe(2147483647);
   });
@@ -49,7 +49,7 @@ describe('addWithoutPlus', () => {
       [-1, -1], [-5, -3], [-10, -20], [-100, -200],
       [5, -3], [-5, 3], [10, -20], [-10, 20], [100, -200], [-100, 200]
     ];
-    
+
     for (const [a, b] of testCases) {
       expect(addWithoutPlus(a, b)).toBe(a + b);
     }

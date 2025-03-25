@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import nextPowerOfTwo from '../../../src/techniques/bitwise/next-power-of-two';
+import nextPowerOfTwo from '../../../src/bitwise/next-power-of-two';
 
 describe('nextPowerOfTwo', () => {
   it('should return 1 for 0 and negative numbers', () => {
@@ -60,10 +60,10 @@ describe('nextPowerOfTwo', () => {
     // Test with the largest power of 2 that can be represented in a 32-bit integer
     const largestPowerOf2In32Bit = 1 << 30; // 2^30 = 1073741824
     expect(nextPowerOfTwo(largestPowerOf2In32Bit)).toBe(largestPowerOf2In32Bit);
-    
+
     // Test with a number just below the largest power of 2
     expect(nextPowerOfTwo(largestPowerOf2In32Bit - 1)).toBe(largestPowerOf2In32Bit);
-    
+
     // Test with a number just above the largest power of 2
     // This would normally return 2^31, but that can't be represented as a positive 32-bit integer
     // The behavior might vary depending on the implementation

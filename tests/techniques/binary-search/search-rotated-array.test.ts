@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { searchRotatedArray } from '../../../src/techniques/binary-search';
+import { searchRotatedArray } from '../../../src/binary-search';
 
 describe('searchRotatedArray', () => {
   describe('with number arrays', () => {

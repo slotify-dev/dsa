@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import swapWithoutTemp from '../../../src/techniques/bitwise/swap-without-temp';
+import swapWithoutTemp from '../../../src/bitwise/swap-without-temp';
 
 describe('swapWithoutTemp', () => {
   it('should swap two different positive numbers', () => {

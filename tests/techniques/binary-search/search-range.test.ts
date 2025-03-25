@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { searchRange } from '../../../src/techniques/binary-search';
+import { searchRange } from '../../../src/binary-search';
 
 describe('searchRange', () => {
   describe('with number arrays', () => {

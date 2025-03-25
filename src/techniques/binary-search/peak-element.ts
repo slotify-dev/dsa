@@ -28,25 +28,25 @@ import defaultComparator from './default-comparator';
  * ); // returns 1
  */
 export default function peakElement<T>(
-  array: T[],
+  array: readonly T[],
   comparator: (a: T, b: T) => number = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;
-  
+
   while (left < right) {
     const mid = left + Math.floor((right - left) / 2);
-    
+
     // If mid is less than its right neighbor, a peak must exist on the right side
     if (comparator(array[mid], array[mid + 1]) < 0) {
       left = mid + 1;
-    } 
+    }
     // Otherwise, a peak must exist on the left side or at mid
     else {
       right = mid;
     }
   }
-  
+
   // At this point, left == right, and this is a peak element
   return left;
 }

@@ -32,23 +32,22 @@ import defaultComparator from './default-comparator';
  *   (person, age) => person.age - age
  * ); // returns 2
  */
-export default function upperBound<T, U = T>(
-  array: T[],
-  target: U,
-  comparator: (element: T, target: U) => number = defaultComparator
+export default function upperBound<T>(
+  array: readonly T[],
+  target: T,
+  comparator: (element: T, target: T) => number = defaultComparator
 ): number {
   let left = 0;
   let right = array.length;
-  
+
   while (left < right) {
     const mid = left + Math.floor((right - left) / 2);
-    
     if (comparator(array[mid], target) <= 0) {
       left = mid + 1;
     } else {
       right = mid;
     }
   }
-  
+
   return left;
 }

@@ -27,10 +27,10 @@ import defaultComparator from './default-comparator';
  *   (person, age) => person.age - age
  * ); // returns 1
  */
-export default function standardBinarySearch<T, U = T>(
-  array: T[],
-  target: U,
-  comparator: (element: T, target: U) => number = defaultComparator
+export default function standardBinarySearch<T>(
+  array: readonly T[],
+  target: T,
+  comparator: (element: T, target: T) => number = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;

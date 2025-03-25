@@ -12,6 +12,6 @@ function comparator<T>(a: T, b: T): number {
  * @param target - The target value to compare against
  * @returns -1 if element < target, 1 if element > target, 0 if equal
  */
-export default function defaultComparator<T, U = T>(element: T, target: U): number {
+export default function defaultComparator<T>(element: T, target: T): number {
   return comparator(element as number as T, target as number as T);
 }

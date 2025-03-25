@@ -38,35 +38,35 @@ import defaultComparator from './default-comparator';
  * minimumInRotatedArray([]); // returns -1
  */
 export default function minimumInRotatedArray<T>(
-  array: T[],
+  array: readonly T[],
   comparator: (a: T, b: T) => number = defaultComparator
 ): T | number {
   let left = 0;
   let right = array.length - 1;
-  
+
   // If the array is empty
   if (array.length === 0) {
     return -1;
   }
-  
+
   // If the array has only one element
   if (left === right) {
     return array[left];
   }
-  
+
   // If the array is not rotated (already sorted)
   if (comparator(array[left], array[right]) < 0) {
     return array[left];
   }
-  
+
   while (left < right) {
     const mid = left + Math.floor((right - left) / 2);
-    
+
     // If mid element is greater than the rightmost element,
     // the minimum must be in the right half
     if (comparator(array[mid], array[right]) > 0) {
       left = mid + 1;
-    } 
+    }
     // If mid element is less than the rightmost element,
     // the minimum must be in the left half or at mid
     else if (comparator(array[mid], array[right]) < 0) {
@@ -79,7 +79,7 @@ export default function minimumInRotatedArray<T>(
       right--;
     }
   }
-  
+
   // At this point, left == right, and this is the minimum element
   return array[left];
 }

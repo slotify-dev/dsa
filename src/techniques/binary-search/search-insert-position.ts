@@ -32,19 +32,18 @@ import defaultComparator from './default-comparator';
  *   (person, age) => person.age - age
  * ); // returns 1
  */
-export default function searchInsertPosition<T, U = T>(
-  array: T[],
-  target: U,
-  comparator: (element: T, target: U) => number = defaultComparator
+export default function searchInsertPosition<T>(
+  array: readonly T[],
+  target: T,
+  comparator: (element: T, target: T) => number = defaultComparator
 ): number {
   let left = 0;
   let right = array.length - 1;
-  
+
   while (left <= right) {
     const mid = left + Math.floor((right - left) / 2);
-    
     const comparisonResult = comparator(array[mid], target);
-    
+
     if (comparisonResult === 0) {
       return mid;
     } else if (comparisonResult < 0) {
@@ -53,7 +52,7 @@ export default function searchInsertPosition<T, U = T>(
       right = mid - 1;
     }
   }
-  
+
   // At this point, left > right
   // 'left' is the position where the target should be inserted
   return left;

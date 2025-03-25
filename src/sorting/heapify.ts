@@ -25,34 +25,31 @@ import { type Comparator } from '../utils/comparator';
  */
 export default function heapify<T>(
   arr: T[],
-  n: number,
-  i: number,
+  index: number,
+  heapSize: number,
   comparator: Comparator<T>
 ): void {
-  // Initialize largest as root
-  let largest = i;
+  let largest = index;
+  const left = 2 * index + 1;
+  const right = 2 * index + 2;
 
-  // Calculate indices of left and right children
-  const left = 2 * i + 1;
-  const right = 2 * i + 2;
-
-  // Compare left child with root
-  if (left < n && comparator(arr[left], arr[largest]) > 0) {
+  // For ascending sort, we need a max heap
+  // If left child is larger than root
+  if (left < heapSize && comparator(arr[left], arr[largest]) > 0) {
     largest = left;
   }
 
-  // Compare right child with largest so far
-  if (right < n && comparator(arr[right], arr[largest]) > 0) {
+  // If right child is larger than largest so far
+  if (right < heapSize && comparator(arr[right], arr[largest]) > 0) {
     largest = right;
   }
 
   // If largest is not root
-  if (largest !== i) {
+  if (largest !== index) {
     // Swap
-    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    [arr[index], arr[largest]] = [arr[largest], arr[index]];
 
-    // Recursively heapify the affected sub-tree
-    heapify(arr, n, largest, comparator);
+    // Recursively sift down the affected sub-tree
+    heapify(arr, largest, heapSize, comparator);
   }
 }
-

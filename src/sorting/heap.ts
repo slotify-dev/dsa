@@ -42,19 +42,20 @@ export default function heapSort<T>(
     return arr;
   }
 
-  // Build a max heap (for ascending order)
+  // Build max heap (for ascending order)
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(arr, n, i, (a, b) => -comparator(a, b));
+    heapify(arr, i, n, comparator);
   }
 
-  // Extract elements from the heap one by one
+  // Extract elements from heap one by one
   for (let i = n - 1; i > 0; i--) {
-    // Move current root (maximum element) to the end
+    // Move current root (max element) to the end
     [arr[0], arr[i]] = [arr[i], arr[0]];
 
     // Call heapify on the reduced heap
-    heapify(arr, i, 0, (a, b) => -comparator(a, b));
+    heapify(arr, 0, i, comparator);
   }
 
   return arr;
 }
+

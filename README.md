@@ -30,18 +30,83 @@ pnpm add @slotify/dsa
 bun add @slotify/dsa
 ```
 
-## Usage
+## Import Options
+
+The library supports multiple import styles to fit your preferences and needs:
+
+### Import the Entire Library
 
 ```typescript
-// Import specific algorithms
-import { standardBinarySearch, countSetBits } from '@slotify/dsa';
+import * as slotify from '@slotify/dsa';
 
-// Use the imported functions
-const index = standardBinarySearch([1, 2, 3, 5, 7, 9], 5);
-console.log(index); // 3
+// Use binary search
+const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
 
-const bits = countSetBits(15);
-console.log(bits); // 4
+// Use bitwise operations
+const result = slotify.bitwise.setBit(42, 3);
+```
+
+### Import Specific Modules
+
+```typescript
+import * as binarySearch from '@slotify/dsa/binary-search';
+import * as bitwise from '@slotify/dsa/bitwise';
+
+// Use binary search directly
+const index = binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+
+// Use bitwise operations directly
+const result = bitwise.setBit(42, 3);
+```
+
+### Import with Alias
+
+```typescript
+import * as dsa from '@slotify/dsa';
+import * as bitwiseOps from '@slotify/dsa/bitwise';
+
+// Use with library alias
+const index = dsa.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+
+// Use with module alias
+const result = bitwiseOps.setBit(42, 3);
+```
+
+### Import Specific Functions
+
+```typescript
+import { standardBinarySearch, lowerBound } from '@slotify/dsa/binary-search';
+import { setBit, isBitSet } from '@slotify/dsa/bitwise';
+
+// Use imported functions directly
+const index = standardBinarySearch([1, 2, 3, 4, 5], 3);
+const result = setBit(42, 3);
+```
+
+## Basic Example
+
+Here's a simple example that demonstrates how to use the library:
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Using binary search
+const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const target = 7;
+
+const index = slotify.binarySearch.standardBinarySearch(array, target);
+console.log(`Found ${target} at index: ${index}`);
+
+// Using bitwise operations
+const num = 42;
+const setBitResult = slotify.bitwise.setBit(num, 3);
+console.log(`Setting bit 3 in ${num} results in: ${setBitResult}`);
+
+const isBitSet = slotify.bitwise.isBitSet(num, 3);
+console.log(`Is bit 3 set in ${num}? ${isBitSet}`);
+
+const countSetBits = slotify.bitwise.countSetBits(num);
+console.log(`Number of set bits in ${num}: ${countSetBits}`);
 ```
 
 ## Available Techniques

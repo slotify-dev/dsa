@@ -13,21 +13,21 @@ import defaultComparator, { type Comparator } from '../utils/comparator';
  * 
  * @example
  * // Find the index of 7 in a sorted number array
- * standardBinarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
+ * binarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
  * 
  * @example
  * // Search for a value that doesn't exist in a number array
- * standardBinarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
+ * binarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
  * 
  * @example
  * // Find a person by age in an array of objects
- * standardBinarySearch(
+ * binarySearch(
  *   [{ name: 'Alice', age: 20 }, { name: 'Bob', age: 25 }, { name: 'Charlie', age: 30 }],
  *   25,
  *   (person, age) => person.age - age
  * ); // returns 1
  */
-export default function standardBinarySearch<T>(
+export default function binarySearch<T>(
   array: readonly T[],
   target: T,
   comparator: Comparator<T> = defaultComparator

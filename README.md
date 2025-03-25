@@ -40,7 +40,7 @@ The library supports multiple import styles to fit your preferences and needs:
 import * as slotify from '@slotify/dsa';
 
 // Use binary search
-const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = slotify.binarySearch.binarySearch([1, 2, 3, 4, 5], 3);
 
 // Use bitwise operations
 const result = slotify.bitwise.setBit(42, 3);
@@ -57,7 +57,7 @@ import * as binarySearch from '@slotify/dsa/binary-search';
 import * as sorting from '@slotify/dsa/sorting';
 
 // Use binary search directly
-const index = binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = binarySearch.binarySearch([1, 2, 3, 4, 5], 3);
 
 // Use bitwise operations directly
 const result = bitwise.setBit(42, 3);
@@ -70,11 +70,11 @@ const sortedArray = sorting.quick([5, 3, 8, 4, 2]);
 
 ```typescript
 import { setBit, isBitSet } from '@slotify/dsa/bitwise';
-import { standardBinarySearch, lowerBound } from '@slotify/dsa/binary-search';
+import { binarySearch, lowerBound } from '@slotify/dsa/binary-search';
 import { quick, merge, bubble } from '@slotify/dsa/sorting';
 
 // Use imported functions directly
-const index = standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = binarySearch([1, 2, 3, 4, 5], 3);
 const result = setBit(42, 3);
 const sortedArray = quick([5, 3, 8, 4, 2]);
 ```

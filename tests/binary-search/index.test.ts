@@ -3,7 +3,7 @@ import * as BinarySearch from '../../src/binary-search';
 
 describe('BinarySearch Module', () => {
   it('should export all binary search functions', () => {
-    expect(typeof BinarySearch.standardBinarySearch).toBe('function');
+    expect(typeof BinarySearch.binarySearch).toBe('function');
     expect(typeof BinarySearch.lowerBound).toBe('function');
     expect(typeof BinarySearch.upperBound).toBe('function');
     expect(typeof BinarySearch.searchRange).toBe('function');

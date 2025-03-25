@@ -14,8 +14,8 @@ import lowerBound from './lower-bound';
 import upperBound from './upper-bound';
 import searchRange from './search-range';
 import peakElement from './peak-element';
+import binarySearch from './standard-binary-search';
 import searchRotatedArray from './search-rotated-array';
-import standardBinarySearch from './standard-binary-search';
 import searchInsertPosition from './search-insert-position';
 import minimumInRotatedArray from './minimum-in-rotated-array';
 
@@ -24,8 +24,8 @@ export {
   upperBound,
   searchRange,
   peakElement,
+  binarySearch,
   searchRotatedArray,
-  standardBinarySearch,
   searchInsertPosition,
   minimumInRotatedArray,
 };

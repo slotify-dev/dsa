@@ -31,7 +31,7 @@ There are several ways to import the binary search functionality:
 import * as slotify from '@slotify/dsa';
 
 // Use binary search functions
-const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = slotify.binarySearch.binarySearch([1, 2, 3, 4, 5], 3);
 ```
 
 ### Import only the binary search module
@@ -40,16 +40,16 @@ const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
 import * as binarySearch from '@slotify/dsa/binary-search';
 
 // Use binary search functions directly
-const index = binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = binarySearch.binarySearch([1, 2, 3, 4, 5], 3);
 ```
 
 ### Import specific functions
 
 ```typescript
-import { standardBinarySearch, lowerBound } from '@slotify/dsa/binary-search';
+import { binarySearch, lowerBound } from '@slotify/dsa/binary-search';
 
 // Use imported functions directly
-const index = standardBinarySearch([1, 2, 3, 4, 5], 3);
+const index = binarySearch([1, 2, 3, 4, 5], 3);
 const lowerIndex = lowerBound([1, 2, 3, 5, 7], 4);
 ```
 
@@ -58,7 +58,7 @@ const lowerIndex = lowerBound([1, 2, 3, 5, 7], 4);
 ### Standard Binary Search
 
 ```typescript
-function standardBinarySearch(nums: number[], target: number): number;
+function binarySearch(nums: number[], target: number): number;
 ```
 
 Finds the index of a target value in a sorted array.
@@ -72,10 +72,10 @@ Finds the index of a target value in a sorted array.
 import * as binarySearch from '@slotify/dsa/binary-search';
 
 // Find the index of 7 in a sorted array
-const index = binarySearch.standardBinarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
+const index = binarySearch.binarySearch([1, 2, 3, 5, 7, 9], 7); // returns 4
 
 // Search for a value that doesn't exist
-const notFound = binarySearch.standardBinarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
+const notFound = binarySearch.binarySearch([1, 2, 3, 5, 7, 9], 6); // returns -1
 ```
 
 ### Lower Bound
@@ -155,7 +155,10 @@ Searches for a target value in a rotated sorted array.
 import * as binarySearch from '@slotify/dsa/binary-search';
 
 // Find 3 in a rotated sorted array
-const rotatedIndex = binarySearch.searchRotatedArray([7, 8, 9, 1, 2, 3, 4, 5, 6], 3); // returns 5
+const rotatedIndex = binarySearch.searchRotatedArray(
+  [7, 8, 9, 1, 2, 3, 4, 5, 6],
+  3
+); // returns 5
 ```
 
 ### Find Minimum in Rotated Sorted Array
@@ -175,7 +178,9 @@ Finds the minimum element in a rotated sorted array.
 import * as slotify from '@slotify/dsa';
 
 // Find the minimum element in a rotated sorted array
-const minIndex = slotify.binarySearch.minimumInRotatedArray([7, 8, 9, 1, 2, 3, 4, 5, 6]); // returns 3 (index of 1)
+const minIndex = slotify.binarySearch.minimumInRotatedArray([
+  7, 8, 9, 1, 2, 3, 4, 5, 6,
+]); // returns 3 (index of 1)
 ```
 
 ### Find Peak Element

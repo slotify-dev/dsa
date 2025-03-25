@@ -21,34 +21,26 @@
  * // Sort an array of non-negative integers
  * counting([5, 3, 8, 4, 2]); // returns [2, 3, 4, 5, 8]
  */
-export default function counting(arr: number[]): number[] {
+export default function countingSort(arr: number[]): number[] {
   if (arr.length === 0) return [];
-  
-  // Find the maximum value in the array
+
   const max = Math.max(...arr);
-  
-  // Create a counting array of size max+1
+  const output = new Array(arr.length);
   const count = new Array(max + 1).fill(0);
-  
-  // Count occurrences of each element
+
   for (let i = 0; i < arr.length; i++) {
     count[arr[i]]++;
   }
-  
-  // Update count array to store the position of each element
+
   for (let i = 1; i <= max; i++) {
     count[i] += count[i - 1];
   }
-  
-  // Create the output array
-  const output = new Array(arr.length);
-  
-  // Build the output array
-  // Traverse the input array from end to maintain stability
+
+
   for (let i = arr.length - 1; i >= 0; i--) {
     output[count[arr[i]] - 1] = arr[i];
     count[arr[i]]--;
   }
-  
+
   return output;
 }

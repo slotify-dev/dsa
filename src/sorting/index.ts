@@ -18,8 +18,8 @@ import merge from './merge';
 import quick from './quick';
 import radix from './radix';
 import bubble from './bubble';
+import heapify from './heapify';
 import counting from './counting';
-import heapSort from './heap-sort';
 import insertion from './insertion';
 import partition from './partition';
 
@@ -30,8 +30,8 @@ export {
   quick,
   radix,
   bubble,
+  heapify,
   counting,
-  heapSort,
   insertion,
   partition,
 };

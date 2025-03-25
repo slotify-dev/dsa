@@ -1,3 +1,5 @@
+import defaultComparator, { type comparator } from '../utils/comparator';
+
 /**
  * Insertion Sort Implementation
  * 
@@ -16,7 +18,7 @@
  * - In-place algorithm (requires constant extra space)
  * 
  * @param arr - The array to be sorted
- * @param comparator - Optional function to compare elements
+ * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
  * @returns The sorted array (same reference as input)
  * 
  * @example
@@ -30,28 +32,23 @@
  *   (a, b) => a.age - b.age
  * ); // returns [{name: 'Jane', age: 20}, {name: 'John', age: 25}]
  */
-export default function insertion<T>(
+export default function insertionSort<T>(
   arr: T[],
-  comparator: (a: T, b: T) => number = (a, b) => a < b ? -1 : a > b ? 1 : 0
+  comparator: comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
-  
-  // Start from the second element (index 1)
+
   for (let i = 1; i < n; i++) {
-    // Store the current element to be compared
     const key = arr[i];
-    
-    // Move elements of arr[0..i-1] that are greater than key
-    // to one position ahead of their current position
+
     let j = i - 1;
     while (j >= 0 && comparator(arr[j], key) > 0) {
       arr[j + 1] = arr[j];
       j--;
     }
-    
-    // Place the key in its correct position
+
     arr[j + 1] = key;
   }
-  
+
   return arr;
 }

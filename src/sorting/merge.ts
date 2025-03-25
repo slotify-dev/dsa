@@ -1,3 +1,5 @@
+import defaultComparator, { type comparator } from '../utils/comparator';
+
 /**
  * Merge Sort Implementation
  * 
@@ -15,7 +17,7 @@
  * - Uses divide-and-conquer strategy
  * 
  * @param arr - The array to be sorted
- * @param comparator - Optional function to compare elements
+ * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
  * @returns A new sorted array
  * 
  * @example
@@ -29,24 +31,19 @@
  *   (a, b) => a.age - b.age
  * ); // returns [{name: 'Jane', age: 20}, {name: 'John', age: 25}]
  */
-export default function merge<T>(
+export default function mergeSort<T>(
   arr: T[],
-  comparator: (a: T, b: T) => number = (a, b) => a < b ? -1 : a > b ? 1 : 0
+  comparator: comparator<T> = defaultComparator
 ): T[] {
-  // Base case: arrays with 0 or 1 elements are already sorted
   if (arr.length <= 1) {
     return arr;
   }
-  
-  // Find the middle point to divide the array
+
   const middle = Math.floor(arr.length / 2);
-  
-  // Divide the array into two halves
   const left = arr.slice(0, middle);
   const right = arr.slice(middle);
-  
-  // Recursively sort both halves
-  return mergeArrays(merge(left, comparator), merge(right, comparator), comparator);
+
+  return mergeArrays(mergeSort(left, comparator), mergeSort(right, comparator), comparator);
 }
 
 /**
@@ -57,16 +54,15 @@ export default function merge<T>(
  * @param comparator - Function to compare elements
  * @returns A new merged and sorted array
  */
-function mergeArrays<T>(
-  left: T[], 
+export function mergeArrays<T>(
+  left: T[],
   right: T[],
-  comparator: (a: T, b: T) => number
+  comparator: comparator<T>
 ): T[] {
   const result: T[] = [];
   let leftIndex = 0;
   let rightIndex = 0;
-  
-  // Compare elements from both arrays and add the smaller one to the result
+
   while (leftIndex < left.length && rightIndex < right.length) {
     if (comparator(left[leftIndex], right[rightIndex]) <= 0) {
       result.push(left[leftIndex]);
@@ -76,18 +72,16 @@ function mergeArrays<T>(
       rightIndex++;
     }
   }
-  
-  // Add any remaining elements from the left array
+
   while (leftIndex < left.length) {
     result.push(left[leftIndex]);
     leftIndex++;
   }
-  
-  // Add any remaining elements from the right array
+
   while (rightIndex < right.length) {
     result.push(right[rightIndex]);
     rightIndex++;
   }
-  
+
   return result;
 }

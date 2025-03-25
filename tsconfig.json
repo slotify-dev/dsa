@@ -1,5 +1,5 @@
 {
-  "include": ["src", "src/sorting/heap.ts"],
+  "include": ["src", "src/sorting/heapify.ts"],
   "exclude": ["node_modules", "dist", "tests"],
   "compilerOptions": {
     "target": "ES2021",

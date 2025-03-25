@@ -1,3 +1,5 @@
+import defaultComparator, { type comparator } from '../utils/comparator';
+
 /**
  * Bubble Sort Implementation
  * 
@@ -16,7 +18,7 @@
  * - Primarily used for educational purposes
  * 
  * @param arr - The array to be sorted
- * @param comparator - Optional function to compare elements
+ * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
  * @returns The sorted array (same reference as input)
  * 
  * @example
@@ -30,34 +32,28 @@
  *   (a, b) => a.age - b.age
  * ); // returns [{name: 'Jane', age: 20}, {name: 'John', age: 25}]
  */
-export default function bubble<T>(
+export default function bubbleSort<T>(
   arr: T[],
-  comparator: (a: T, b: T) => number = (a, b) => a < b ? -1 : a > b ? 1 : 0
+  comparator: comparator<T> = defaultComparator
 ): T[] {
   const n = arr.length;
-  
-  // Optimization: flag to track if any swaps were made in a pass
+
   let swapped;
-  
-  // Traverse through all array elements
+
   for (let i = 0; i < n - 1; i++) {
     swapped = false;
-    
-    // Last i elements are already in place
+
     for (let j = 0; j < n - i - 1; j++) {
-      // Compare adjacent elements
       if (comparator(arr[j], arr[j + 1]) > 0) {
-        // Swap if the element found is greater than the next element
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
         swapped = true;
       }
     }
-    
-    // If no swapping occurred in this pass, the array is sorted
+
     if (!swapped) {
       break;
     }
   }
-  
+
   return arr;
 }

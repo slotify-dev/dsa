@@ -1,3 +1,5 @@
+import defaultComparator from './default-comparator';
+
 /**
  * Searches for a target value in a rotated sorted array.
  * A rotated sorted array is a sorted array that has been rotated at some pivot point.
@@ -6,48 +8,67 @@
  * Time Complexity: O(log n)
  * Space Complexity: O(1)
  * 
- * @param nums - A rotated sorted array of numbers with no duplicates
+ * @param array - A rotated sorted array of elements with no duplicates
  * @param target - The target value
+ * @param comparator - Optional function to compare elements. Uses utils/comparator by default.
  * @returns The index of the target if found, otherwise -1
  * 
  * @example
- * // Find 0 in a rotated array
+ * // Find 0 in a rotated number array
  * searchRotatedArray([4, 5, 6, 7, 0, 1, 2], 0); // returns 4
  * 
  * @example
- * // Find 3 in a rotated array
+ * // Find 3 in a rotated number array
  * searchRotatedArray([4, 5, 6, 7, 0, 1, 2], 3); // returns -1
+ * 
+ * @example
+ * // Find a person with age 25 in a rotated array of objects
+ * searchRotatedArray(
+ *   [{ age: 30 }, { age: 40 }, { age: 10 }, { age: 20 }, { age: 25 }],
+ *   25,
+ *   (person, age) => person.age - age
+ * ); // returns 4
  */
-export default function searchRotatedArray(nums: number[], target: number): number {
+export default function searchRotatedArray<T, U = T>(
+  array: T[],
+  target: U,
+  comparator: (element: T, target: U) => number = defaultComparator
+): number {
   let left = 0;
-  let right = nums.length - 1;
-  
+  let right = array.length - 1;
+
   while (left <= right) {
     const mid = left + Math.floor((right - left) / 2);
-    
-    if (nums[mid] === target) {
+
+    const midCompare = comparator(array[mid], target);
+    if (midCompare === 0) {
       return mid;
     }
-    
+
     // Check if the left half is sorted
-    if (nums[left] <= nums[mid]) {
+    const leftCompare = comparator(array[left], array[mid]);
+    if (leftCompare <= 0) {
       // Check if target is in the left half
-      if (nums[left] <= target && target < nums[mid]) {
+      const leftTargetCompare = comparator(array[left], target);
+      const midTargetCompare = comparator(target, array[mid]);
+      if (leftTargetCompare <= 0 && midTargetCompare < 0) {
         right = mid - 1;
       } else {
         left = mid + 1;
       }
-    } 
+    }
     // Right half is sorted
     else {
       // Check if target is in the right half
-      if (nums[mid] < target && target <= nums[right]) {
+      const targetMidCompare = comparator(target, array[mid]);
+      const targetRightCompare = comparator(target, array[right]);
+      if (targetMidCompare > 0 && targetRightCompare <= 0) {
         left = mid + 1;
       } else {
         right = mid - 1;
       }
     }
   }
-  
+
   return -1; // Target not found
 }

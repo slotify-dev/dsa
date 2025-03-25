@@ -79,21 +79,23 @@ const result = setBit(42, 3);
 const sortedArray = quick([5, 3, 8, 4, 2]);
 ```
 
-## Available Techniques
-
-The library currently includes the following techniques:
-
-- [Binary Search](docs/binary-search.md): Efficient searching in sorted arrays
-- [Bitwise Operations](docs/bitwise.md): Low-level bit manipulation functions
-- [Sorting Algorithms](docs/sorting.md): Various algorithms for sorting data
-
 ## Documentation
 
 For detailed documentation of each technique, please refer to the docs directory:
 
-- [Binary Search Documentation](docs/binary-search.md)
-- [Bitwise Operations Documentation](docs/bitwise.md)
+- [Trie Documentation](docs/trie.md)
+- [Heap Documentation](docs/heap.md)
+- [Graph Documentation](docs/graph.md)
+- [Max Heap Documentation](docs/max-heap.md)
+- [Min Heap Documentation](docs/min-heap.md)
+- [AVL Tree Documentation](docs/avl-tree.md)
+- [LRU Cache Documentation](docs/lru-cache.md)
+- [Disjoint Set Documentation](docs/disjoint-set.md)
 - [Sorting Algorithms Documentation](docs/sorting.md)
+- [Bitwise Operations Documentation](docs/bitwise.md)
+- [Binary Search Documentation](docs/binary-search.md)
+- [Priority Queue Documentation](docs/priority-queue.md)
+- [Binary Search Tree Documentation](docs/binary-search-tree.md)
 
 ## Contributing
 

@@ -63,6 +63,70 @@
       "import": "./dist/binary-search/*.js",
       "types": "./dist/binary-search/*.d.ts"
     },
+    "./sorting": {
+      "import": "./dist/sorting/index.js",
+      "types": "./dist/sorting/index.d.ts"
+    },
+    "./sorting/*": {
+      "import": "./dist/sorting/*.js",
+      "types": "./dist/sorting/*.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.d.ts"
+    },
+    "./data-structure": {
+      "import": "./dist/data-structure/index.js",
+      "types": "./dist/data-structure/index.d.ts"
+    },
+    "./data-structure/*": {
+      "import": "./dist/data-structure/*.js",
+      "types": "./dist/data-structure/*.d.ts"
+    },
+    "./avl-tree": {
+      "import": "./dist/data-structure/avl-tree.js",
+      "types": "./dist/data-structure/avl-tree.d.ts"
+    },
+    "./binary-search-tree": {
+      "import": "./dist/data-structure/binary-search-tree.js",
+      "types": "./dist/data-structure/binary-search-tree.d.ts"
+    },
+    "./disjoint-set": {
+      "import": "./dist/data-structure/disjoint-set.js",
+      "types": "./dist/data-structure/disjoint-set.d.ts"
+    },
+    "./graph": {
+      "import": "./dist/data-structure/graph.js",
+      "types": "./dist/data-structure/graph.d.ts"
+    },
+    "./heap": {
+      "import": "./dist/data-structure/heap.js",
+      "types": "./dist/data-structure/heap.d.ts"
+    },
+    "./lru-cache": {
+      "import": "./dist/data-structure/lru-cache.js",
+      "types": "./dist/data-structure/lru-cache.d.ts"
+    },
+    "./max-heap": {
+      "import": "./dist/data-structure/max-heap.js",
+      "types": "./dist/data-structure/max-heap.d.ts"
+    },
+    "./min-heap": {
+      "import": "./dist/data-structure/min-heap.js",
+      "types": "./dist/data-structure/min-heap.d.ts"
+    },
+    "./priority-queue": {
+      "import": "./dist/data-structure/priority-queue.js",
+      "types": "./dist/data-structure/priority-queue.d.ts"
+    },
+    "./trie": {
+      "import": "./dist/data-structure/trie.js",
+      "types": "./dist/data-structure/trie.d.ts"
+    },
     "./*": {
       "import": "./dist/*.js",
       "types": "./dist/*.d.ts"

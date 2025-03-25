@@ -454,4 +454,210 @@ describe("Trie", () => {
         // The original word should still be there
         expect(trie.search("hello")).toBe(true);
     });
+
+    test("Comprehensive test for deleteHelper method", () => {
+        const trie = new Trie();
+        
+        // Test case 1: Delete a leaf node
+        trie.insert("test");
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        
+        // Test case 2: Delete a node with children
+        trie.insert("team");
+        trie.insert("teams");
+        expect(trie.delete("team")).toBe(true);
+        expect(trie.search("team")).toBe(false);
+        expect(trie.search("teams")).toBe(true);
+        
+        // Test case 3: Delete a node that would make a branch empty
+        expect(trie.delete("teams")).toBe(true);
+        expect(trie.search("teams")).toBe(false);
+        expect(trie.getAllWords()).toEqual([]);
+        
+        // Test case 4: Delete from a complex structure
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+        
+        // Delete the middle node
+        expect(trie.delete("abc")).toBe(true);
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("ab")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("abcd")).toBe(true);
+        
+        // Delete the leaf node
+        expect(trie.delete("abcd")).toBe(true);
+        expect(trie.search("abcd")).toBe(false);
+        expect(trie.search("ab")).toBe(true);
+        
+        // Delete the remaining nodes
+        expect(trie.delete("ab")).toBe(true);
+        expect(trie.delete("a")).toBe(true);
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Edge cases for deleteHelper method", () => {
+        const trie = new Trie();
+        
+        // Test case 1: Delete from empty trie
+        expect(trie.delete("test")).toBe(false);
+        
+        // Test case 2: Delete empty string
+        trie.insert("");
+        expect(trie.delete("")).toBe(true);
+        expect(trie.search("")).toBe(false);
+        
+        // Test case 3: Delete with partial match
+        trie.insert("test");
+        expect(trie.delete("te")).toBe(false);
+        expect(trie.search("test")).toBe(true);
+        
+        // Test case 4: Delete with no match at all
+        expect(trie.delete("xyz")).toBe(false);
+        expect(trie.search("test")).toBe(true);
+        
+        // Test case 5: Delete with shared prefixes
+        trie.insert("testing");
+        trie.insert("tester");
+        
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        expect(trie.search("testing")).toBe(true);
+        expect(trie.search("tester")).toBe(true);
+        
+        // Test case 6: Delete all words
+        expect(trie.delete("testing")).toBe(true);
+        expect(trie.delete("tester")).toBe(true);
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Comprehensive test for all deleteHelper branches", () => {
+        const trie = new Trie();
+        
+        // Setup a complex trie structure
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+        trie.insert("abce");
+        trie.insert("abd");
+        trie.insert("ac");
+        trie.insert("acd");
+        
+        // Case 1: Delete a leaf node
+        expect(trie.delete("abcd")).toBe(true);
+        expect(trie.search("abcd")).toBe(false);
+        expect(trie.search("abc")).toBe(true);
+        
+        // Case 2: Delete a node with one child
+        expect(trie.delete("abc")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("abce")).toBe(true);
+        
+        // Case 3: Delete a node with multiple children
+        expect(trie.delete("ab")).toBe(true);
+        expect(trie.search("ab")).toBe(false);
+        expect(trie.search("abce")).toBe(true);
+        expect(trie.search("abd")).toBe(true);
+        
+        // Case 4: Delete a node that is a prefix of other words
+        expect(trie.delete("a")).toBe(true);
+        expect(trie.search("a")).toBe(false);
+        expect(trie.search("abce")).toBe(true);
+        expect(trie.search("abd")).toBe(true);
+        expect(trie.search("ac")).toBe(true);
+        expect(trie.search("acd")).toBe(true);
+        
+        // Case 5: Delete remaining words
+        expect(trie.delete("abce")).toBe(true);
+        expect(trie.delete("abd")).toBe(true);
+        expect(trie.delete("ac")).toBe(true);
+        expect(trie.delete("acd")).toBe(true);
+        
+        // Trie should be empty
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Comprehensive test for searchNode method", () => {
+        const trie = new Trie();
+        
+        // Empty trie
+        expect(trie.search("test")).toBe(false);
+        expect(trie.startsWith("test")).toBe(false);
+        
+        // Add a word
+        trie.insert("test");
+        
+        // Exact match
+        expect(trie.search("test")).toBe(true);
+        
+        // Prefix match
+        expect(trie.startsWith("te")).toBe(true);
+        expect(trie.startsWith("tes")).toBe(true);
+        expect(trie.startsWith("test")).toBe(true);
+        
+        // No match
+        expect(trie.search("tes")).toBe(false);
+        expect(trie.search("testing")).toBe(false);
+        expect(trie.startsWith("testing")).toBe(false);
+        
+        // Add more words
+        trie.insert("testing");
+        trie.insert("tester");
+        
+        // Check all prefixes
+        expect(trie.startsWith("")).toBe(true);
+        expect(trie.startsWith("t")).toBe(true);
+        expect(trie.startsWith("te")).toBe(true);
+        expect(trie.startsWith("tes")).toBe(true);
+        expect(trie.startsWith("test")).toBe(true);
+        expect(trie.startsWith("testi")).toBe(true);
+        expect(trie.startsWith("testin")).toBe(true);
+        expect(trie.startsWith("testing")).toBe(true);
+        expect(trie.startsWith("teste")).toBe(true);
+        expect(trie.startsWith("tester")).toBe(true);
+        
+        // Check exact matches
+        expect(trie.search("test")).toBe(true);
+        expect(trie.search("testing")).toBe(true);
+        expect(trie.search("tester")).toBe(true);
+        expect(trie.search("tes")).toBe(false);
+        expect(trie.search("testi")).toBe(false);
+    });
+
+    test("Edge cases for collectWords method", () => {
+        const trie = new Trie();
+        
+        // Empty trie
+        expect(trie.getAllWords()).toEqual([]);
+        
+        // Single word
+        trie.insert("test");
+        expect(trie.getAllWords()).toEqual(["test"]);
+        
+        // Multiple words with shared prefixes
+        trie.insert("testing");
+        trie.insert("tester");
+        
+        const words = trie.getAllWords();
+        expect(words.length).toBe(3);
+        expect(words).toContain("test");
+        expect(words).toContain("testing");
+        expect(words).toContain("tester");
+        
+        // Empty string
+        trie.insert("");
+        expect(trie.getAllWords()).toContain("");
+        
+        // Delete all words
+        trie.delete("test");
+        trie.delete("testing");
+        trie.delete("tester");
+        trie.delete("");
+        
+        expect(trie.getAllWords()).toEqual([]);
+    });
 });

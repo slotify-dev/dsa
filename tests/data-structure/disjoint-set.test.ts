@@ -600,4 +600,192 @@ describe("DisjointSet", () => {
         expect(sets.size).toBe(1);
         expect(sets.get(ds.find(1))?.sort()).toEqual([1, 2, 3, 4, 5]);
     });
+
+    test("Extremely detailed test for all union rank scenarios", () => {
+        // Test all three rank comparison scenarios in isolation
+        
+        // Scenario 1: rootX.rank < rootY.rank
+        const ds1 = new DisjointSet();
+        ds1.makeSet(1); // rank 0
+        ds1.makeSet(2); // rank 0
+        ds1.makeSet(3); // rank 0
+        
+        // Make rootY have higher rank
+        ds1.union(2, 3); // Now root of 2,3 has rank 1
+        
+        // Union with rootX having lower rank
+        ds1.union(1, 2);
+        
+        // Verify the union worked correctly
+        expect(ds1.connected(1, 2)).toBe(true);
+        expect(ds1.connected(1, 3)).toBe(true);
+        expect(ds1.getSize(1)).toBe(3);
+        
+        // Scenario 2: rootX.rank > rootY.rank
+        const ds2 = new DisjointSet();
+        ds2.makeSet(1); // rank 0
+        ds2.makeSet(2); // rank 0
+        ds2.makeSet(3); // rank 0
+        
+        // Make rootX have higher rank
+        ds2.union(1, 2); // Now root of 1,2 has rank 1
+        
+        // Union with rootX having higher rank
+        ds2.union(1, 3);
+        
+        // Verify the union worked correctly
+        expect(ds2.connected(1, 3)).toBe(true);
+        expect(ds2.connected(2, 3)).toBe(true);
+        expect(ds2.getSize(1)).toBe(3);
+        
+        // Scenario 3: rootX.rank == rootY.rank
+        const ds3 = new DisjointSet();
+        ds3.makeSet(1); // rank 0
+        ds3.makeSet(2); // rank 0
+        
+        // Union with equal ranks
+        ds3.union(1, 2);
+        
+        // Verify the union worked correctly
+        expect(ds3.connected(1, 2)).toBe(true);
+        expect(ds3.getSize(1)).toBe(2);
+        
+        // Add another element to test that the rank increased
+        ds3.makeSet(3); // rank 0
+        ds3.union(1, 3);
+        
+        // Verify the union worked correctly
+        expect(ds3.connected(1, 3)).toBe(true);
+        expect(ds3.connected(2, 3)).toBe(true);
+        expect(ds3.getSize(1)).toBe(3);
+    });
+
+    test("Extremely detailed test for find with path compression", () => {
+        const ds = new DisjointSet();
+        
+        // Create elements
+        ds.makeSet(1);
+        ds.makeSet(2);
+        ds.makeSet(3);
+        ds.makeSet(4);
+        ds.makeSet(5);
+        
+        // Create a chain: 1 <- 2 <- 3 <- 4 <- 5
+        ds.union(1, 2);
+        ds.union(2, 3);
+        ds.union(3, 4);
+        ds.union(4, 5);
+        
+        // Find the root of 5, which should compress the path
+        const root = ds.find(5);
+        
+        // All elements should now point directly to the root
+        expect(ds.find(1)).toBe(root);
+        expect(ds.find(2)).toBe(root);
+        expect(ds.find(3)).toBe(root);
+        expect(ds.find(4)).toBe(root);
+        expect(ds.find(5)).toBe(root);
+        
+        // Test find on a non-existent element (should create it)
+        const newRoot = ds.find(6);
+        expect(newRoot).toBe(6);
+        
+        // Test find on an element that is its own parent
+        expect(ds.find(6)).toBe(6);
+    });
+
+    test("Extremely detailed test for all union operations", () => {
+        const ds = new DisjointSet();
+        
+        // Create elements
+        for (let i = 1; i <= 10; i++) {
+            ds.makeSet(i);
+        }
+        
+        // Test union of elements that are already in the same set
+        ds.union(1, 2);
+        const root1 = ds.find(1);
+        ds.union(1, 2); // This should have no effect
+        expect(ds.find(1)).toBe(root1);
+        expect(ds.find(2)).toBe(root1);
+        expect(ds.getSize(1)).toBe(2);
+        
+        // Test union with different rank scenarios
+        
+        // Create sets with different ranks
+        ds.union(3, 4); // Rank 1
+        ds.union(5, 6);
+        ds.union(5, 7); // Rank 1
+        
+        ds.union(8, 9);
+        ds.union(8, 10); // Rank 1
+        
+        // Union sets with equal ranks
+        ds.union(3, 5); // Both rank 1, result should be rank 2
+        
+        // Union a set with lower rank to higher rank
+        ds.union(1, 3); // Rank 1 to rank 2
+        
+        // Union a set with higher rank to lower rank
+        ds.union(8, 3); // Rank 1 to rank 2
+        
+        // All elements should be in the same set
+        for (let i = 1; i <= 10; i++) {
+            for (let j = 1; j <= 10; j++) {
+                expect(ds.connected(i, j)).toBe(true);
+            }
+        }
+        
+        // Size should be 10
+        expect(ds.getSize(1)).toBe(10);
+    });
+
+    test("Extremely detailed test for all getSets scenarios", () => {
+        const ds = new DisjointSet();
+        
+        // Empty set
+        expect(ds.getSets().size).toBe(0);
+        
+        // Add elements but don't union them
+        for (let i = 1; i <= 5; i++) {
+            ds.makeSet(i);
+        }
+        
+        // Each element should be in its own set
+        let sets = ds.getSets();
+        expect(sets.size).toBe(5);
+        for (let i = 1; i <= 5; i++) {
+            expect(sets.has(i)).toBe(true);
+            expect(sets.get(i)).toEqual([i]);
+        }
+        
+        // Union some elements
+        ds.union(1, 2);
+        ds.union(3, 4);
+        
+        // Should now have 3 sets
+        sets = ds.getSets();
+        expect(sets.size).toBe(3);
+        
+        // Check the contents of each set
+        const root1 = ds.find(1);
+        const root3 = ds.find(3);
+        const root5 = ds.find(5);
+        
+        expect(sets.get(root1)?.sort()).toEqual([1, 2]);
+        expect(sets.get(root3)?.sort()).toEqual([3, 4]);
+        expect(sets.get(root5)).toEqual([5]);
+        
+        // Union all elements
+        ds.union(1, 3);
+        ds.union(1, 5);
+        
+        // Should now have 1 set
+        sets = ds.getSets();
+        expect(sets.size).toBe(1);
+        
+        // Check the contents of the set
+        const root = ds.find(1);
+        expect(sets.get(root)?.sort()).toEqual([1, 2, 3, 4, 5]);
+    });
 });

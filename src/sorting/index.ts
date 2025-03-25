@@ -21,7 +21,7 @@ import bubble from './bubble';
 import heapify from './heapify';
 import counting from './counting';
 import insertion from './insertion';
-import partition from './partition';
+import { lomutoPartition, hoarePartition } from './partition';
 
 export {
   tim,
@@ -33,5 +33,7 @@ export {
   heapify,
   counting,
   insertion,
-  partition,
+  hoarePartition,
+  lomutoPartition,
+  lomutoPartition as partition
 };

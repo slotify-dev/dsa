@@ -79,3 +79,5 @@ export function hoarePartition<T>(
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
+
+export default lomutoPartition;

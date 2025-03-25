@@ -31,5 +31,12 @@ describe('minimumInRotatedArray', () => {
   it('should work with arrays containing duplicate elements', () => {
     expect(minimumInRotatedArray([3, 3, 1, 3])).toBe(1);
     expect(minimumInRotatedArray([2, 2, 2, 0, 1])).toBe(0);
+    // Test the case where mid equals right and we decrement right
+    expect(minimumInRotatedArray([3, 1, 3, 3, 3, 3])).toBe(1);
+    expect(minimumInRotatedArray([3, 3, 3, 3, 3, 3])).toBe(3);
+  });
+
+  it('should handle empty arrays', () => {
+    expect(minimumInRotatedArray([])).toBe(-1);
   });
 });

@@ -788,4 +788,130 @@ describe("DisjointSet", () => {
         const root = ds.find(1);
         expect(sets.get(root)?.sort()).toEqual([1, 2, 3, 4, 5]);
     });
+
+    test("Targeted test for makeSet with existing element", () => {
+        const ds = new DisjointSet();
+        
+        // Create a set with element 1
+        ds.makeSet(1);
+        expect(ds.find(1)).toBe(1);
+        
+        // Call makeSet again on the same element
+        ds.makeSet(1);
+        expect(ds.find(1)).toBe(1);
+        
+        // The size should still be 1
+        expect(ds.getSize(1)).toBe(1);
+    });
+
+    test("Targeted test for find with path compression", () => {
+        const ds = new DisjointSet();
+        
+        // Create a chain of elements
+        ds.makeSet(1);
+        ds.makeSet(2);
+        ds.makeSet(3);
+        
+        // Manually set parent relationships to create a chain
+        // 1 <- 2 <- 3
+        ds.union(1, 2);
+        ds.union(2, 3);
+        
+        // Find the root of 3, which should compress the path
+        const root = ds.find(3);
+        expect(root).toBe(ds.find(1));
+        
+        // All elements should now point directly to the root
+        expect(ds.find(2)).toBe(root);
+    });
+
+    test("Targeted test for all union rank scenarios", () => {
+        // Test case 1: rootX rank < rootY rank
+        const ds1 = new DisjointSet();
+        ds1.makeSet(1);
+        ds1.makeSet(2);
+        ds1.makeSet(3);
+        
+        // Make rootY have higher rank
+        ds1.union(2, 3);
+        
+        // Union with rootX having lower rank
+        ds1.union(1, 2);
+        expect(ds1.connected(1, 2)).toBe(true);
+        expect(ds1.connected(1, 3)).toBe(true);
+        
+        // Test case 2: rootX rank > rootY rank
+        const ds2 = new DisjointSet();
+        ds2.makeSet(1);
+        ds2.makeSet(2);
+        ds2.makeSet(3);
+        
+        // Make rootX have higher rank
+        ds2.union(1, 2);
+        
+        // Union with rootX having higher rank
+        ds2.union(1, 3);
+        expect(ds2.connected(1, 3)).toBe(true);
+        expect(ds2.connected(2, 3)).toBe(true);
+        
+        // Test case 3: rootX rank == rootY rank
+        const ds3 = new DisjointSet();
+        ds3.makeSet(1);
+        ds3.makeSet(2);
+        
+        // Union with equal ranks
+        ds3.union(1, 2);
+        expect(ds3.connected(1, 2)).toBe(true);
+    });
+
+    test("Targeted test for connected method", () => {
+        const ds = new DisjointSet();
+        
+        // Create two separate sets
+        ds.makeSet(1);
+        ds.makeSet(2);
+        
+        // Elements should not be connected initially
+        expect(ds.connected(1, 2)).toBe(false);
+        
+        // Connect the elements
+        ds.union(1, 2);
+        
+        // Elements should now be connected
+        expect(ds.connected(1, 2)).toBe(true);
+        
+        // Test with elements that don't exist yet
+        expect(ds.connected(3, 4)).toBe(false);
+        
+        // Connect one new element to existing set
+        ds.union(1, 3);
+        expect(ds.connected(2, 3)).toBe(true);
+    });
+
+    test("Targeted test for getSize method", () => {
+        const ds = new DisjointSet();
+        
+        // Create a set with one element
+        ds.makeSet(1);
+        expect(ds.getSize(1)).toBe(1);
+        
+        // Add another element to the set
+        ds.makeSet(2);
+        ds.union(1, 2);
+        expect(ds.getSize(1)).toBe(2);
+        expect(ds.getSize(2)).toBe(2);
+        
+        // Add more elements
+        ds.makeSet(3);
+        ds.makeSet(4);
+        ds.union(3, 4);
+        expect(ds.getSize(3)).toBe(2);
+        
+        // Union the two sets
+        ds.union(1, 3);
+        expect(ds.getSize(1)).toBe(4);
+        expect(ds.getSize(2)).toBe(4);
+        expect(ds.getSize(3)).toBe(4);
+        expect(ds.getSize(4)).toBe(4);
+    });
 });

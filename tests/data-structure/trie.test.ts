@@ -660,4 +660,230 @@ describe("Trie", () => {
         
         expect(trie.getAllWords()).toEqual([]);
     });
+
+    test("Targeted test for insert method", () => {
+        const trie = new Trie();
+        
+        // Insert an empty string
+        trie.insert("");
+        expect(trie.search("")).toBe(true);
+        
+        // Insert a single character
+        trie.insert("a");
+        expect(trie.search("a")).toBe(true);
+        
+        // Insert a word
+        trie.insert("test");
+        expect(trie.search("test")).toBe(true);
+        
+        // Insert a word with a shared prefix
+        trie.insert("testing");
+        expect(trie.search("testing")).toBe(true);
+        expect(trie.search("test")).toBe(true);
+        
+        // Insert a word with an existing character
+        trie.insert("team");
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("test")).toBe(true);
+        expect(trie.search("testing")).toBe(true);
+    });
+
+    test("Targeted test for search method", () => {
+        const trie = new Trie();
+        
+        // Search in an empty trie
+        expect(trie.search("test")).toBe(false);
+        
+        // Insert a word and search for it
+        trie.insert("test");
+        expect(trie.search("test")).toBe(true);
+        
+        // Search for a prefix of an existing word
+        expect(trie.search("te")).toBe(false);
+        
+        // Search for a word that doesn't exist
+        expect(trie.search("testing")).toBe(false);
+        
+        // Insert more words and search
+        trie.insert("testing");
+        trie.insert("team");
+        expect(trie.search("testing")).toBe(true);
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("tea")).toBe(false);
+    });
+
+    test("Targeted test for startsWith method", () => {
+        const trie = new Trie();
+        
+        // StartsWith in an empty trie
+        expect(trie.startsWith("t")).toBe(false);
+        
+        // Insert a word and check prefixes
+        trie.insert("test");
+        expect(trie.startsWith("")).toBe(true);
+        expect(trie.startsWith("t")).toBe(true);
+        expect(trie.startsWith("te")).toBe(true);
+        expect(trie.startsWith("tes")).toBe(true);
+        expect(trie.startsWith("test")).toBe(true);
+        expect(trie.startsWith("testi")).toBe(false);
+        
+        // Insert more words and check prefixes
+        trie.insert("testing");
+        trie.insert("team");
+        expect(trie.startsWith("te")).toBe(true);
+        expect(trie.startsWith("tes")).toBe(true);
+        expect(trie.startsWith("test")).toBe(true);
+        expect(trie.startsWith("testi")).toBe(true);
+        expect(trie.startsWith("testin")).toBe(true);
+        expect(trie.startsWith("testing")).toBe(true);
+        expect(trie.startsWith("tea")).toBe(true);
+        expect(trie.startsWith("team")).toBe(true);
+    });
+
+    test("Targeted test for searchNode method", () => {
+        const trie = new Trie();
+        
+        // SearchNode in an empty trie
+        expect(trie.search("test")).toBe(false);
+        expect(trie.startsWith("test")).toBe(false);
+        
+        // Insert a word and search for nodes
+        trie.insert("test");
+        expect(trie.search("test")).toBe(true);
+        expect(trie.startsWith("te")).toBe(true);
+        
+        // Search for nodes that don't exist
+        expect(trie.search("testing")).toBe(false);
+        expect(trie.startsWith("x")).toBe(false);
+    });
+
+    test("Targeted test for delete method", () => {
+        const trie = new Trie();
+        
+        // Delete from an empty trie
+        expect(trie.delete("test")).toBe(false);
+        
+        // Insert and delete a word
+        trie.insert("test");
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        
+        // Delete a word that doesn't exist
+        expect(trie.delete("testing")).toBe(false);
+        
+        // Insert multiple words and delete one
+        trie.insert("test");
+        trie.insert("testing");
+        trie.insert("team");
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        expect(trie.search("testing")).toBe(true);
+        expect(trie.search("team")).toBe(true);
+    });
+
+    test("Targeted test for deleteHelper method", () => {
+        const trie = new Trie();
+        
+        // Case 1: Delete a leaf node
+        trie.insert("test");
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        
+        // Case 2: Delete a node with children
+        trie.insert("test");
+        trie.insert("testing");
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        expect(trie.search("testing")).toBe(true);
+        
+        // Case 3: Delete a node that would make a branch empty
+        expect(trie.delete("testing")).toBe(true);
+        expect(trie.search("testing")).toBe(false);
+        expect(trie.getAllWords()).toEqual([]);
+        
+        // Case 4: Delete from a complex structure
+        trie.insert("a");
+        trie.insert("ab");
+        trie.insert("abc");
+        trie.insert("abcd");
+        
+        // Delete the middle node
+        expect(trie.delete("abc")).toBe(true);
+        expect(trie.search("a")).toBe(true);
+        expect(trie.search("ab")).toBe(true);
+        expect(trie.search("abc")).toBe(false);
+        expect(trie.search("abcd")).toBe(true);
+        
+        // Delete the leaf node
+        expect(trie.delete("abcd")).toBe(true);
+        expect(trie.search("abcd")).toBe(false);
+        expect(trie.search("ab")).toBe(true);
+        
+        // Delete the remaining nodes
+        expect(trie.delete("ab")).toBe(true);
+        expect(trie.delete("a")).toBe(true);
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Targeted test for deleteHelper with complex branching", () => {
+        const trie = new Trie();
+        
+        // Create a complex structure
+        trie.insert("test");
+        trie.insert("team");
+        trie.insert("tea");
+        trie.insert("teapot");
+        
+        // Delete a word that shares a prefix with others
+        expect(trie.delete("tea")).toBe(true);
+        expect(trie.search("tea")).toBe(false);
+        expect(trie.search("team")).toBe(true);
+        expect(trie.search("teapot")).toBe(true);
+        expect(trie.search("test")).toBe(true);
+        
+        // Delete another word
+        expect(trie.delete("team")).toBe(true);
+        expect(trie.search("team")).toBe(false);
+        expect(trie.search("teapot")).toBe(true);
+        expect(trie.search("test")).toBe(true);
+        
+        // Delete a word that doesn't share a prefix with others
+        expect(trie.delete("test")).toBe(true);
+        expect(trie.search("test")).toBe(false);
+        expect(trie.search("teapot")).toBe(true);
+        
+        // Delete the last word
+        expect(trie.delete("teapot")).toBe(true);
+        expect(trie.search("teapot")).toBe(false);
+        expect(trie.getAllWords()).toEqual([]);
+    });
+
+    test("Targeted test for collectWords method", () => {
+        const trie = new Trie();
+        
+        // Empty trie
+        expect(trie.getAllWords()).toEqual([]);
+        
+        // Single word
+        trie.insert("test");
+        expect(trie.getAllWords()).toEqual(["test"]);
+        
+        // Multiple words
+        trie.insert("team");
+        trie.insert("tea");
+        
+        const words = trie.getAllWords();
+        expect(words.length).toBe(3);
+        expect(words).toContain("test");
+        expect(words).toContain("team");
+        expect(words).toContain("tea");
+        
+        // Delete a word and check again
+        trie.delete("team");
+        const updatedWords = trie.getAllWords();
+        expect(updatedWords.length).toBe(2);
+        expect(updatedWords).toContain("test");
+        expect(updatedWords).toContain("tea");
+        expect(updatedWords).not.toContain("team");
+    });
 });

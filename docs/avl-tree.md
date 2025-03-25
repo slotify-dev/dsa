@@ -2,10 +2,41 @@
 
 An AVL tree is a self-balancing binary search tree where the difference between heights of left and right subtrees cannot be more than one for all nodes.
 
+## Import Examples
+
+There are several ways to import the AVL Tree functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use AVL Tree
+const avl = new slotify.AVLTree<number>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use AVL Tree directly
+const avl = new dataStructure.AVLTree<number>();
+```
+
+### Import specific class
+
+```typescript
+import { AVLTree } from '@slotify/dsa/avl-tree';
+
+// Use imported class directly
+const avl = new AVLTree<number>();
+```
+
 ## Usage
 
 ```typescript
-import { AVLTree } from '@slotify/data-structure';
+import { AVLTree } from '@slotify/dsa/avl-tree';
 
 // Create an AVL tree for numbers
 const avl = new AVLTree<number>();

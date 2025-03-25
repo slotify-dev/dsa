@@ -2,10 +2,41 @@
 
 A disjoint-set data structure (also called a union–find data structure) keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. It provides near-constant-time operations to add new sets, merge existing sets, and determine whether elements are in the same set.
 
+## Import Examples
+
+There are several ways to import the Disjoint Set functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Disjoint Set
+const ds = new slotify.DisjointSet<string>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Disjoint Set directly
+const ds = new dataStructure.DisjointSet<string>();
+```
+
+### Import specific class
+
+```typescript
+import { DisjointSet } from '@slotify/dsa/disjoint-set';
+
+// Use imported class directly
+const ds = new DisjointSet<string>();
+```
+
 ## Usage
 
 ```typescript
-import { DisjointSet } from '@slotify/data-structure';
+import { DisjointSet } from '@slotify/dsa/disjoint-set';
 
 // Create a disjoint set
 const ds = new DisjointSet<string>();

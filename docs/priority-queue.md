@@ -2,10 +2,41 @@
 
 A priority queue is an abstract data type similar to a regular queue, but where each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
+## Import Examples
+
+There are several ways to import the Priority Queue functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Priority Queue
+const pq = new slotify.PriorityQueue<string>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Priority Queue directly
+const pq = new dataStructure.PriorityQueue<string>();
+```
+
+### Import specific class
+
+```typescript
+import { PriorityQueue } from '@slotify/dsa/priority-queue';
+
+// Use imported class directly
+const pq = new PriorityQueue<string>();
+```
+
 ## Usage
 
 ```typescript
-import { PriorityQueue } from '@slotify/data-structure';
+import { PriorityQueue } from '@slotify/dsa/priority-queue';
 
 // Create a min priority queue (lower values have higher priority)
 const minPQ = new PriorityQueue<string>();

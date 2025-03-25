@@ -2,10 +2,41 @@
 
 A binary heap is a complete binary tree where the value of each node is greater than or equal to (max heap) or less than or equal to (min heap) the values of its children.
 
+## Import Examples
+
+There are several ways to import the Heap functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Heap
+const minHeap = new slotify.Heap<number>((a, b) => a - b);
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Heap directly
+const minHeap = new dataStructure.Heap<number>((a, b) => a - b);
+```
+
+### Import specific class
+
+```typescript
+import { Heap } from '@slotify/dsa/heap';
+
+// Use imported class directly
+const minHeap = new Heap<number>((a, b) => a - b);
+```
+
 ## Usage
 
 ```typescript
-import { Heap } from '@slotify/data-structure';
+import { Heap } from '@slotify/dsa/heap';
 
 // Create a min heap
 const minHeap = new Heap<number>((a, b) => a - b);

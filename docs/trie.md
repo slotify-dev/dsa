@@ -2,10 +2,41 @@
 
 A trie, also called a prefix tree, is a tree-like data structure used to store a dynamic set of strings. Tries are particularly useful for implementing autocomplete and spell-checking features.
 
+## Import Examples
+
+There are several ways to import the Trie functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Trie
+const trie = new slotify.Trie();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Trie directly
+const trie = new dataStructure.Trie();
+```
+
+### Import specific class
+
+```typescript
+import { Trie } from '@slotify/dsa/trie';
+
+// Use imported class directly
+const trie = new Trie();
+```
+
 ## Usage
 
 ```typescript
-import { Trie } from '@slotify/data-structure';
+import { Trie } from '@slotify/dsa/trie';
 
 // Create a new trie
 const trie = new Trie();

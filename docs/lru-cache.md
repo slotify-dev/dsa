@@ -2,10 +2,41 @@
 
 An LRU (Least Recently Used) Cache is a data structure that maintains a fixed-size cache of key-value pairs, evicting the least recently used items when the cache reaches its capacity.
 
+## Import Examples
+
+There are several ways to import the LRU Cache functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use LRU Cache
+const cache = new slotify.LRUCache<string, number>(3);
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use LRU Cache directly
+const cache = new dataStructure.LRUCache<string, number>(3);
+```
+
+### Import specific class
+
+```typescript
+import { LRUCache } from '@slotify/dsa/lru-cache';
+
+// Use imported class directly
+const cache = new LRUCache<string, number>(3);
+```
+
 ## Usage
 
 ```typescript
-import { LRUCache } from '@slotify/data-structure';
+import { LRUCache } from '@slotify/dsa/lru-cache';
 
 // Create an LRU cache with capacity 3
 const cache = new LRUCache<string, number>(3);

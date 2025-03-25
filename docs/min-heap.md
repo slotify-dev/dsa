@@ -2,10 +2,41 @@
 
 A min heap is a complete binary tree where the value of each node is less than or equal to the values of its children. The minimum element is always at the root.
 
+## Import Examples
+
+There are several ways to import the Min Heap functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Min Heap
+const minHeap = new slotify.MinHeap<number>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Min Heap directly
+const minHeap = new dataStructure.MinHeap<number>();
+```
+
+### Import specific class
+
+```typescript
+import { MinHeap } from '@slotify/dsa/min-heap';
+
+// Use imported class directly
+const minHeap = new MinHeap<number>();
+```
+
 ## Usage
 
 ```typescript
-import { MinHeap } from '@slotify/data-structure';
+import { MinHeap } from '@slotify/dsa/min-heap';
 
 // Create a min heap for numbers
 const minHeap = new MinHeap<number>();

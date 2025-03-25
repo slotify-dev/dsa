@@ -2,10 +2,41 @@
 
 A binary search tree (BST) is a binary tree data structure where each node has at most two children, and for each node, all elements in the left subtree are less than the node, and all elements in the right subtree are greater than the node.
 
+## Import Examples
+
+There are several ways to import the Binary Search Tree functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Binary Search Tree
+const bst = new slotify.BinarySearchTree<number>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Binary Search Tree directly
+const bst = new dataStructure.BinarySearchTree<number>();
+```
+
+### Import specific class
+
+```typescript
+import { BinarySearchTree } from '@slotify/dsa/binary-search-tree';
+
+// Use imported class directly
+const bst = new BinarySearchTree<number>();
+```
+
 ## Usage
 
 ```typescript
-import { BinarySearchTree } from '@slotify/data-structure';
+import { BinarySearchTree } from '@slotify/dsa/binary-search-tree';
 
 // Create a BST for numbers
 const bst = new BinarySearchTree<number>();

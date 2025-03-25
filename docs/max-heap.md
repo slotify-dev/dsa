@@ -2,10 +2,41 @@
 
 A max heap is a complete binary tree where the value of each node is greater than or equal to the values of its children. The maximum element is always at the root.
 
+## Import Examples
+
+There are several ways to import the Max Heap functionality:
+
+### Import the entire library
+
+```typescript
+import * as slotify from '@slotify/dsa';
+
+// Use Max Heap
+const maxHeap = slotify.MaxHeap<number>();
+```
+
+### Import from data-structure module
+
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
+
+// Use Max Heap directly
+const maxHeap = dataStructure.MaxHeap<number>();
+```
+
+### Import specific function
+
+```typescript
+import { MaxHeap } from '@slotify/dsa/max-heap';
+
+// Use imported function directly
+const maxHeap = MaxHeap<number>();
+```
+
 ## Usage
 
 ```typescript
-import { MaxHeap } from '@slotify/data-structure';
+import { MaxHeap } from '@slotify/dsa/max-heap';
 
 // Create a max heap for numbers
 const maxHeap = MaxHeap<number>();

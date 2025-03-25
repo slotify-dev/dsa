@@ -9,62 +9,43 @@ For example:
 - Web pages: Pages are nodes, and hyperlinks are edges.
 - Maps: Cities are nodes, and roads are edges.
 
-### Key Components of a Graph
+## Import Examples
 
-- Vertices (Nodes): These are the fundamental units of a graph. Each node can represent an object, entity, or point.
-- Edges: These are the connections between nodes. They can be directed (one-way) or undirected (two-way).
-- Weight: Sometimes, edges have weights, which represent the cost, distance, or strength of the connection.
+There are several ways to import the Graph functionality:
 
-### Types of Graphs
+### Import the entire library
 
-Undirected Graph: Edges have no direction. The relationship is mutual.
-Example: A friendship between two people (if A is friends with B, then B is friends with A).
+```typescript
+import * as slotify from '@slotify/dsa';
 
-```bash
-A -- B
-|    |
-C -- D
-
-Nodes: A, B, C, D
-Edges: A-B, A-C, B-D, C-D
+// Use Graph
+const graph = new slotify.Graph<string>(true);
 ```
 
-Directed Graph (Digraph): Edges have a direction. The relationship is one-way.
-Example: A follower relationship on social media (if A follows B, it doesn't mean B follows A).
+### Import from data-structure module
 
-```bash
-A -> B
-|    ^
-v    |
-C -> D
+```typescript
+import * as dataStructure from '@slotify/dsa/data-structure';
 
-Nodes: A, B, C, D
-Directed Edges: A→B, A→C, C→D, D→B
+// Use Graph directly
+const graph = new dataStructure.Graph<string>(true);
 ```
 
-Weighted Graph: Edges have weights associated with them.
-Example: A map where the weight represents the distance between two cities.
+### Import specific class
 
-```bash
-A --5-- B
-|       |
-2       3
-|       |
-C --1-- D
+```typescript
+import { Graph } from '@slotify/dsa/graph';
 
-Nodes: A, B, C, D
-Weighted Edges: A-B (5), A-C (2), B-D (3), C-D (1)
+// Use imported class directly
+const graph = new Graph<string>(true);
 ```
-
-Unweighted Graph: Edges have no weights.
-Example: A simple social network where friendships are either present or absent.
 
 ## Usage
 
 This implementation supports both directed and undirected graphs, as well as weighted edges.
 
 ```typescript
-import { Graph } from '@slotify/data-structure';
+import { Graph } from '@slotify/dsa/graph';
 
 // Create a directed graph
 const directedGraph = new Graph<string>(true);

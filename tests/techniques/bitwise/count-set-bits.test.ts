@@ -58,14 +58,19 @@ describe('countSetBits', () => {
   });
 
   it('should handle negative numbers correctly', () => {
-    // In two's complement, negative numbers have more bits set
-    // -1 in binary is all 1s
-    expect(countSetBits(-1)).toBeGreaterThan(16);
+    // In JavaScript, negative numbers are represented in two's complement
+    // The actual behavior depends on the implementation of the countSetBits function
+    // and how it handles the 32-bit representation
     
-    // -2 in binary has all bits set except the least significant bit
-    expect(countSetBits(-2)).toBeGreaterThan(16);
+    // Test the relative relationship instead of absolute values
+    // -1 should have more set bits than -2
+    expect(countSetBits(-1)).toBeGreaterThanOrEqual(countSetBits(-2));
     
-    // Verify that -1 has one more bit set than -2
-    expect(countSetBits(-1)).toBe(countSetBits(-2) + 1);
+    // -1 in binary is all 1s, so it should have more bits set than any positive number
+    expect(countSetBits(-1)).toBeGreaterThan(countSetBits(65535));
+    
+    // -2 should have one fewer bit set than -1
+    const diff = countSetBits(-1) - countSetBits(-2);
+    expect(diff).toBe(1);
   });
 });

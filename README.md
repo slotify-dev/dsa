@@ -44,6 +44,9 @@ const index = slotify.binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
 
 // Use bitwise operations
 const result = slotify.bitwise.setBit(42, 3);
+
+// Use sorting algorithms
+const sortedArray = slotify.sorting.quick([5, 3, 8, 4, 2]);
 ```
 
 ### Import Specific Modules
@@ -51,12 +54,16 @@ const result = slotify.bitwise.setBit(42, 3);
 ```typescript
 import * as bitwise from '@slotify/dsa/bitwise';
 import * as binarySearch from '@slotify/dsa/binary-search';
+import * as sorting from '@slotify/dsa/sorting';
 
 // Use binary search directly
 const index = binarySearch.standardBinarySearch([1, 2, 3, 4, 5], 3);
 
 // Use bitwise operations directly
 const result = bitwise.setBit(42, 3);
+
+// Use sorting algorithms directly
+const sortedArray = sorting.quick([5, 3, 8, 4, 2]);
 ```
 
 ### Import Specific Functions
@@ -64,10 +71,12 @@ const result = bitwise.setBit(42, 3);
 ```typescript
 import { setBit, isBitSet } from '@slotify/dsa/bitwise';
 import { standardBinarySearch, lowerBound } from '@slotify/dsa/binary-search';
+import { quick, merge, bubble } from '@slotify/dsa/sorting';
 
 // Use imported functions directly
 const index = standardBinarySearch([1, 2, 3, 4, 5], 3);
 const result = setBit(42, 3);
+const sortedArray = quick([5, 3, 8, 4, 2]);
 ```
 
 ## Available Techniques
@@ -76,6 +85,7 @@ The library currently includes the following techniques:
 
 - [Binary Search](docs/binary-search.md): Efficient searching in sorted arrays
 - [Bitwise Operations](docs/bitwise.md): Low-level bit manipulation functions
+- [Sorting Algorithms](docs/sorting.md): Various algorithms for sorting data
 
 ## Documentation
 
@@ -83,6 +93,7 @@ For detailed documentation of each technique, please refer to the docs directory
 
 - [Binary Search Documentation](docs/binary-search.md)
 - [Bitwise Operations Documentation](docs/bitwise.md)
+- [Sorting Algorithms Documentation](docs/sorting.md)
 
 ## Contributing
 

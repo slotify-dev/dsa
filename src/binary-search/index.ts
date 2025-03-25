@@ -14,7 +14,6 @@ import lowerBound from './lower-bound';
 import upperBound from './upper-bound';
 import searchRange from './search-range';
 import peakElement from './peak-element';
-import defaultComparator from './default-comparator';
 import searchRotatedArray from './search-rotated-array';
 import standardBinarySearch from './standard-binary-search';
 import searchInsertPosition from './search-insert-position';
@@ -25,7 +24,6 @@ export {
   upperBound,
   searchRange,
   peakElement,
-  defaultComparator,
   searchRotatedArray,
   standardBinarySearch,
   searchInsertPosition,

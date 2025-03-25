@@ -8,6 +8,7 @@
  */
 
 // Re-export all modules
+export * as utils from './utils';
 export * as sorting from './sorting';
 export * as bitwise from './bitwise';
 export * as binarySearch from './binary-search';
